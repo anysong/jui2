@@ -1,3 +1,4 @@
+
 //jui-radio
 $(function () {
     console.log($('.jui-radio').length);
@@ -6,18 +7,31 @@ $(function () {
     $('.jui-radio').each(function (index, element) {
         console.log('element', element);
         var className = $(element).prop('class');
+        var name = $(element).prop('name');
         //TODO 处理 className；
-        console.log(className);
-        var radio = '<label class="jui-radio-wrapper ' + className + '">' +
-            '<span class="jui-radio-input">' +
-            '<input type="radio">' +
-            '<span></span>' +
+        var _arr = className.split(' ');
+        var _list = [];
+        var isChecked = '';
+        for (var i = 0; i < _arr.length; i++) {
+            if(_arr[i] != 'jui-radio'){
+                _list.push(_arr[i]);
+            }
+            if(_arr[i] === 'is-checked'){
+                isChecked = 'is-checked';
+            }
+        }
+        var newclass = _list.join(' ');
+        var html = '<label class="jui-radio-wrapper ' + newclass + '">' +
+            '<span class="jui-radio-input ' + isChecked + '">' +
+            '<input type="radio" class="jui-radio-original" name="' + name + '">' +
+            '<span class="jui-radio-inner"></span>' +
             '</span>' +
             '<span class="jui-radio-label">' +
             '2222' +
             '</span>' +
-            '</label>'
-        $(element).after(radio);
+            '</label>';
+       
+        $(element).after(html);
         $(element).remove();
     })
 })
