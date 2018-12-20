@@ -23,11 +23,11 @@ $(function () {
         var newclass = _list.join(' ');
         var html = '<label class="jui-radio-wrapper ' + newclass + '">' +
             '<span class="jui-radio-input ' + isChecked + '">' +
-            '<input type="radio" class="jui-radio-original" name="' + name + '">' +
             '<span class="jui-radio-inner"></span>' +
+            '<input type="radio" class="jui-radio-original" name="' + name + '">' +
             '</span>' +
             '<span class="jui-radio-label">' +
-            '2222' +
+            '备选项<!---->' +
             '</span>' +
             '</label>';
        
