@@ -1,3 +1,5 @@
+$jui-color: #4363f4;
+
 .jui-radio-wrapper {
     position: relative;
     display: inline-block;
@@ -17,14 +19,14 @@
     &:hover {
         .jui-radio-style {
             .jui-radio-inner {
-                border-color: #1890ff;
+                border-color: $jui-color;
             }
         }
     }
     .jui-radio-style {
         &.jui-radio-checked {
             .jui-radio-inner {
-                border-color: #1890ff; 
+                border-color: $jui-color;
                 &:after {
                     // transform: scale(1);
                     transform: translate(-50%,-50%) scale(1);
@@ -45,7 +47,7 @@
         }
         &:hover {
             .jui-radio-inner {
-                border-color: #1890ff;
+                border-color: $jui-color;
             }
         }
         position: relative;
@@ -61,7 +63,7 @@
         list-style: none;
         white-space: nowrap;
         outline: none;
-        vertical-align: middle; //sub
+        vertical-align: sub; //sub
         cursor: pointer;
         // 代糖
         .jui-radio-inner {
@@ -71,8 +73,8 @@
             left: 0;
             display: block;      /////FIXME !!!!!
             // display: inline-block;  /////FIXME !!!!!
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-width: 1px;
             border-style: solid;
             // border-radius: 100%;
@@ -84,14 +86,14 @@
 
             &:after {
                 position: absolute;
-                width: 6px;
-                height: 6px;
+                width: 8px;
+                height: 8px;
                 left: 50%;
                 top: 50%;
                 display: table;
                 border-radius: 100%;
                 border-radius: 8px;
-                background-color: #1890ff;
+                background-color: $jui-color;
                 content: ' '; 
                 transform: translate(-50%,-50%) scale(0);
                 transition: all .3s ease-in;
