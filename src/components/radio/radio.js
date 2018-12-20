@@ -21,7 +21,7 @@ $(function () {
             }
         }
         var newclass = _list.join(' ');
-        var html = '<label class="jui-radio-wrapper ' + adminStyle + juiStyle +'">' +
+        var html = '<label class="jui-radio-wrapper ' + adminStyle + '">' +
             '<span class="jui-radio-style' + juiStyle + '">' +
             '<span class="jui-radio-inner"></span>' +
             '<input type="radio" class="jui-radio-original" name="' + name + '">' +
@@ -34,4 +34,16 @@ $(function () {
         $(element).after(html);
         $(element).remove();
     })
+
+    //事件
+    $('input[type="radio"]').on('change', function(){
+        console.log(this);
+        alert(12);
+        console.log($(this).prop('checked'));
+    })
+
+    // $('.jui-radio-style').on('click', function(){
+    //     alert(2);
+    //     console.log($(this).children('input'));
+    // })
 })
