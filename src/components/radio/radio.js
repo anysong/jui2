@@ -11,18 +11,18 @@ $(function () {
         //TODO 处理 className；
         var _arr = className.split(' ');
         var _list = [];
-        var isChecked = '';
+        var juiStyle = '',
+            adminStyle = '';
         for (var i = 0; i < _arr.length; i++) {
-            if(_arr[i] != 'jui-radio'){
-                _list.push(_arr[i]);
-            }
-            if(_arr[i] === 'is-checked'){
-                isChecked = 'is-checked';
+            if(_arr[i].indexOf('jui-') != -1){
+                juiStyle += ' ' + _arr[i];
+            }else {
+                adminStyle += ' ' + _arr[i];
             }
         }
         var newclass = _list.join(' ');
-        var html = '<label class="jui-radio-wrapper ' + newclass + '">' +
-            '<span class="jui-radio-input ' + isChecked + '">' +
+        var html = '<label class="jui-radio-wrapper ' + adminStyle + juiStyle +'">' +
+            '<span class="jui-radio-style' + juiStyle + '">' +
             '<span class="jui-radio-inner"></span>' +
             '<input type="radio" class="jui-radio-original" name="' + name + '">' +
             '</span>' +
