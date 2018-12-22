@@ -22,6 +22,9 @@ input[type='checkbox'].disabled {
     outline: none;
     margin-right: 8px;
     cursor: pointer;
+    &.jui-radio-wrapper-checked {
+
+    }
     &:hover {
         .jui-radio-style {
             .jui-radio-inner {
