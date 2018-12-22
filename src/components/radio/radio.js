@@ -41,18 +41,49 @@ $(function () {
             // alert(8);            
         }
     }
+    /**
+     * 每次change事件触发
+     * wrap包裹层和样式层class重置
+     * 没有input元素不执行操作
+     * 选中添加 aria-checked="true" 属性
+     * role="radio" x
+     * tabindex="0" x
+     * input元素自身 aria-hidden="true"
+     * label
+     * 
+     * 
+     * 
+     * input 添加了 原生onchange事件：
+     * 父级添加class 而label级别判断条件是label
+     * 
+     * 
+     * */
 
-    $('body').on('click', '.jui-radio-wrapper', function(){
-        console.log(this.change());
-    })
+
+    // 没有 jui-radio-wrapper 照样执行
+    // 外层并不支持添加class 允许添加id 
+    // $('body').on('click', '.jui-radio-wrapper', function(){
+    //     console.log(this.onzrchange());
+    // })
     
-    //事件
-    // $('input[type="radio"]').on('change', function(){
+    //自定义事件
+    // $('input[type="radio"]').on('onzrchange', function(){
     //     console.log(this);
     //     alert(12);
     //     console.log($(this).prop('checked'));
     // })
-
+    // $('input[type="radio"]').on('change', function(){
+    //     alert(2);
+    // })
+    // $('input[type="radio"]').on('change', function(){
+    //     alert(3);
+    // })
+    // $('input[type="radio"]').on('blur', function(){
+    //     alert('blur');
+    // })
+    // $('input[type="radio"]').on('focus', function(){
+    //     alert('focus');
+    // })
     // $('.jui-radio-style').on('click', function(){
     //     alert(2);
     //     console.log($(this).children('input'));
