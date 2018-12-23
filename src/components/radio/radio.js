@@ -26,6 +26,7 @@ $(function () {
         $input.attr('name', _name); //name
         $input.attr('id', _id); //id
         $input.addClass('jui-radio-original');
+        $input.removeClass('jui-radio');
         //已选中
         if(_checked){
             $input.parent().addClass('jui-radio-checked');
