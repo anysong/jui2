@@ -1,146 +1,107 @@
-
 //jui-radio
+
 $(function () {
-    console.log($('.jui-radio').length);
-    // var className = $('.jui-radio').prop('class');
-    // console.log(className);
     $('.jui-radio').each(function (index, element) {
-        // console.log('element', element);
-        var className = $(element).prop('class');
-        var name = $(element).prop('name');
-        var id = $(element).prop('id');
-        //TODO 处理 className；
-        var _arr = className.split(' ');
-        var juiStyle = '',
-            adminStyle = '';
-        for (var i = 0; i < _arr.length; i++) {
-            if(_arr[i].indexOf('jui-') != -1){
-                juiStyle += ' ' + _arr[i];
-            }else {
-                adminStyle += ' ' + _arr[i];
-            }
-        }
-        var html = '<label class="jui-radio-wrapper ' + adminStyle + '">' +
-            '<span class="jui-radio-style' + juiStyle + '">' +
+        var $original = $(element);
+        var _class = $original.prop('class'),
+            _name = $original.prop('name'),
+            _checked = $original.prop('checked'),
+            _disabled = $original.prop('disabled'),
+            _value = $original.prop('value'),
+            _id = $original.prop('id');
+        console.log('_value',_value);
+        var html = '<label class="jui-radio-wrapper">' +
+            '<span class="jui-radio-clone">' +
             '<span class="jui-radio-inner"></span>' +
-            '<input type="radio" class="jui-radio-original" name="' + name + '">' +
+            '<input type="radio" class="' + _class + '">' + 
             '</span>' +
-            '<span class="jui-radio-label">' +
-            '备选项<!---->' +
+            '<span class="jui-radio-label">' + _value +
             '</span>' +
             '</label>';
-        var $dom = $(html);
-        var $input = $dom.find('input');
-        $input.attr('id', id); //id 传入
-        var input = $dom.find('input')[0];
-        addEvent(input) //绑定事件
-        $(element).after($dom);
-        $(element).remove();
+        var $dom = $(html),
+            $input = $dom.find('input');
+        //暂时不添加class
+        $input.prop('checked', _checked); //checked
+        $input.prop('disabled', _disabled); //disabled
+        $input.attr('name', _name); //name
+        $input.attr('id', _id); //id
+        $input.addClass('jui-radio-original');
+        //已选中
+        if(_checked){
+            $input.parent().addClass('jui-radio-checked');
+            $input.closest('label').addClass('jui-radio-wrapper-checked');
+        }
+        //已禁用
+        if(_disabled){
+            $input.parent().addClass('jui-radio-disabled');
+            $input.closest('label').addClass('jui-radio-wrapper-disabled');
+        }
         
+        var input = $input[0];
+        addEvent(input) //绑定事件
+        //
+        $original.after($dom);
+        $original.remove();
     })
     //绑定自定义事件
-    function addEvent(dom){
-        dom.onzrchange = function(option){
+    function addEvent(dom) {
+        dom.onzrchange = function (option) {
             var $input = $(this),
-                _input = this,
-                name = $input.prop('name');
+                original = this,
+                $parent = $input.parent(),
+                inputName = $input.prop('name');
             var opt = option || {};
-            // 选中
-            if($input.prop('checked')){
-                $input.parent().attr('class', 'jui-radio-style jui-radio-checked'); //选中当前
-                $input.closest('label').attr('class', 'jui-radio-wrapper jui-radio-wrapper-checked'); //外包裹
+
+            for(var name in opt){
+                if(name === 'checked') $input.prop('checked', opt[name]);
+                if(name === 'disabled') $input.prop('disabled', opt[name]);
+                if(name === 'value') $parent.siblings('span').html(opt[name]);
+            }
+            if(opt.beforeFn) opt.beforeFn();
+            //选中
+            if ($input.prop('checked')) {
+                $parent.addClass('jui-radio-checked');
+                $input.closest('label').addClass('jui-radio-wrapper-checked');
                 //其他项目取消选中
-                var aInput = $('input[name=' + name + ']');
-                aInput.each(function(i, element){
-                    if(_input !== element){
-                        var $element = $(element);
-                        $element.parent().attr('class', 'jui-radio-style');
-                        $element.closest('label').attr('class', 'jui-radio-wrapper'); //外包裹
+                var aInput = $('input[name=' + inputName + ']');
+                aInput.each(function (i, element) {
+                    if (original !== element) {
+                        element.onzrchange? element.onzrchange(): '';
                     }
                 })
+            }else {
+                $parent.removeClass('jui-radio-checked');
+                $input.closest('label').removeClass('jui-radio-wrapper-checked');
             }
-            if(opt.checked){
-                $input.prop('checked', true);
-                
-                $input.parent().attr('class', 'jui-radio-style jui-radio-checked'); //选中当前
-                $input.closest('label').attr('class', 'jui-radio-wrapper jui-radio-wrapper-checked'); //外包裹
-                //其他项目取消选中
-                var aInput = $('input[name=' + name + ']');
-                aInput.each(function(i, element){
-                    if(_input !== element){
-                        var $element = $(element);
-                        $element.parent().attr('class', 'jui-radio-style');
-                        $element.closest('label').attr('class', 'jui-radio-wrapper'); //外包裹
-                    }
-                })
+            //禁用
+            if ($input.prop('disabled')) {
+                $parent.addClass('jui-radio-disabled');
+                $input.closest('label').addClass('jui-radio-wrapper-disabled');
+            }else {
+                $parent.removeClass('jui-radio-disabled');
+                $input.closest('label').removeClass('jui-radio-wrapper-disabled');
             }
-            //执行回调
-            if(opt.fn){
-                opt.fn();
-            }
+
+            if(opt.afterFn) opt.afterFn();
         }
     }
-    $('input[type="radio"]').on('change', function(){
-        this.onzrchange()
+    $('input[type="radio"]').on('change', function () {
+        this.onzrchange? this.onzrchange():''; //普通radio 没有onzrchange
     })
 
-    $('.js-select').on('click',function(){
+    $('.js-select').on('click', function () {
         console.log($('#id1')[0])
         //选中
-        $('#id1')[0].onzrchange(
-            {
-                checked: true,
-                fn: function(){
-                    alert(1);
-                }
+        $('#id1')[0].onzrchange({
+            checked: true,
+            disabled: true,
+            value: 'xx',
+            beforeFn: function () {
+                console.log(1);
+            },
+            afterFn: function(){
+                console.log(2);
             }
-        )
+        })
     })
-    /**
-     * 每次change事件触发
-     * wrap包裹层和样式层class重置
-     * 没有input元素不执行操作
-     * 选中添加 aria-checked="true" 属性
-     * role="radio" x
-     * tabindex="0" x
-     * input元素自身 aria-hidden="true"
-     * label
-     * 
-     * 
-     * 
-     * input 添加了 原生onchange事件：
-     * 父级添加class 而label级别判断条件是label
-     * 
-     * 
-     * */
-
-
-    // 没有 jui-radio-wrapper 照样执行
-    // 外层并不支持添加class 允许添加id 
-    // $('body').on('click', '.jui-radio-wrapper', function(){
-    //     console.log(this.onzrchange());
-    // })
-    
-    //自定义事件
-    // $('input[type="radio"]').on('onzrchange', function(){
-    //     console.log(this);
-    //     alert(12);
-    //     console.log($(this).prop('checked'));
-    // })
-    // $('input[type="radio"]').on('change', function(){
-    //     alert(2);
-    // })
-    // $('input[type="radio"]').on('change', function(){
-    //     alert(3);
-    // })
-    // $('input[type="radio"]').on('blur', function(){
-    //     alert('blur');
-    // })
-    // $('input[type="radio"]').on('focus', function(){
-    //     alert('focus');
-    // })
-    // $('.jui-radio-style').on('click', function(){
-    //     alert(2);
-    //     console.log($(this).children('input'));
-    // })
 })

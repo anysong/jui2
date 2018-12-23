@@ -26,13 +26,13 @@ input[type='checkbox'].disabled {
 
     }
     &:hover {
-        .jui-radio-style {
+        .jui-radio-clone {
             .jui-radio-inner {
                 border-color: $jui-color;
             }
         }
     }
-    .jui-radio-style {
+    .jui-radio-clone {
         &.jui-radio-checked {
             .jui-radio-inner {
                 border-color: $jui-color;
