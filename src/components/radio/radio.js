@@ -63,7 +63,7 @@ $(function () {
                     }
                 };
             }
-            if(opt.beforeFn) opt.beforeFn();
+            if(opt.beforeFn) opt.beforeFn.call(this);
             //选中
             if ($input.prop('checked')) {
                 $parent.addClass('jui-radio-checked');
@@ -88,22 +88,21 @@ $(function () {
                 $label.removeClass('jui-radio-wrapper-disabled');
             }
 
-            if(opt.afterFn) opt.afterFn();
+            if(opt.afterFn) opt.afterFn.call(this);
         }
     }
 
     $('.js-select').on('click', function () {
-        console.log($('#id1')[0])
         //选中
         $('#id1')[0].onzrchange({
             checked: true,
             disabled: true,
             value: 'xx',
             beforeFn: function () {
-                console.log(1);
+                console.log(this);
             },
             afterFn: function(){
-                console.log(2);
+                console.log(this);
             }
         })
     })
