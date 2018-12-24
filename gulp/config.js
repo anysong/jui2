@@ -3,6 +3,7 @@ var config = {
         'base',
         'radio',
         'checkbox',
+        'dropdown'
     ]
 };
 
