@@ -1,7 +1,7 @@
 $jui-color: #4363f4;
-input[type='radio'][disabled],
 input[type='checkbox'][disabled],
-input[type='radio'].disabled,
+input[type='checkbox'][disabled],
+input[type='checkbox'].disabled,
 input[type='checkbox'].disabled {
     cursor: not-allowed
 }
@@ -22,6 +22,9 @@ input[type='checkbox'].disabled {
     outline: none;
     margin-right: 8px;
     cursor: pointer;
+    &.jui-checkbox-wrapper-checked {
+
+    }
     &:hover {
         .jui-checkbox-style {
             .jui-checkbox-inner {
@@ -29,7 +32,7 @@ input[type='checkbox'].disabled {
             }
         }
     }
-    .jui-checkbox-style {
+    .jui-checkbox-clone {
         &.jui-checkbox-checked {
             .jui-checkbox-inner {
                 border-color: $jui-color;
