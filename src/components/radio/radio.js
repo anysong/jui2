@@ -1,55 +1,49 @@
 //jui-radio
-
 $(function () {
     $('.jui-radio').each(function (index, element) {
         var $original = $(element);
-        var _class = $original.prop('class'),
-            _name = $original.prop('name'),
-            _checked = $original.prop('checked'),
+        var _checked = $original.prop('checked'),
             _disabled = $original.prop('disabled'),
-            _value = $original.prop('value'),
-            _id = $original.prop('id');
-        console.log('_value',_value);
+            _value = $original.prop('value');
+           
         var html = '<label class="jui-radio-wrapper">' +
             '<span class="jui-radio-clone">' +
             '<span class="jui-radio-inner"></span>' +
-            '<input type="radio" class="' + _class + '">' + 
+            // '<input type="radio" class="' + _class + '">' + 
             '</span>' +
             '<span class="jui-radio-label">' + _value +
             '</span>' +
             '</label>';
-        var $dom = $(html),
-            $input = $dom.find('input');
-        //暂时不添加class
-        $input.prop('checked', _checked); //checked
-        $input.prop('disabled', _disabled); //disabled
-        $input.attr('name', _name); //name
-        $input.attr('id', _id); //id
-        $input.addClass('jui-radio-original');
-        $input.removeClass('jui-radio');
+        var $shell = $(html);
+        $original.after($shell);
+        $shell.children('.jui-radio-clone').append(element);
+        $original.addClass('jui-radio-original');
+        $original.removeClass('jui-radio');
+
+        var $parent = $original.parent(),
+            $label = $original.closest('label');
         //已选中
         if(_checked){
-            $input.parent().addClass('jui-radio-checked');
-            $input.closest('label').addClass('jui-radio-wrapper-checked');
+            $parent.addClass('jui-radio-checked');
+            $label.addClass('jui-radio-wrapper-checked');
         }
         //已禁用
         if(_disabled){
-            $input.parent().addClass('jui-radio-disabled');
-            $input.closest('label').addClass('jui-radio-wrapper-disabled');
+            $parent.addClass('jui-radio-disabled');
+            $label.addClass('jui-radio-wrapper-disabled');
         }
-        
-        var input = $input[0];
-        addEvent(input) //绑定事件
-        //
-        $original.after($dom);
-        $original.remove();
+        addEvent(element) //绑定事件
     })
     //绑定自定义事件
     function addEvent(dom) {
+        $(dom).on('change', function () {
+            this.onzrchange? this.onzrchange():'';
+        })
         dom.onzrchange = function (option) {
             var $input = $(this),
                 original = this,
                 $parent = $input.parent(),
+                $label = $input.closest('label'),
                 inputName = $input.prop('name');
             var opt = option || {};
 
@@ -62,7 +56,7 @@ $(function () {
             //选中
             if ($input.prop('checked')) {
                 $parent.addClass('jui-radio-checked');
-                $input.closest('label').addClass('jui-radio-wrapper-checked');
+                $label.addClass('jui-radio-wrapper-checked');
                 //其他项目取消选中
                 var aInput = $('input[name=' + inputName + ']');
                 aInput.each(function (i, element) {
@@ -72,23 +66,20 @@ $(function () {
                 })
             }else {
                 $parent.removeClass('jui-radio-checked');
-                $input.closest('label').removeClass('jui-radio-wrapper-checked');
+                $label.removeClass('jui-radio-wrapper-checked');
             }
             //禁用
             if ($input.prop('disabled')) {
                 $parent.addClass('jui-radio-disabled');
-                $input.closest('label').addClass('jui-radio-wrapper-disabled');
+                $label.addClass('jui-radio-wrapper-disabled');
             }else {
                 $parent.removeClass('jui-radio-disabled');
-                $input.closest('label').removeClass('jui-radio-wrapper-disabled');
+                $label.removeClass('jui-radio-wrapper-disabled');
             }
 
             if(opt.afterFn) opt.afterFn();
         }
     }
-    $('input[type="radio"]').on('change', function () {
-        this.onzrchange? this.onzrchange():''; //普通radio 没有onzrchange
-    })
 
     $('.js-select').on('click', function () {
         console.log($('#id1')[0])
@@ -104,5 +95,12 @@ $(function () {
                 console.log(2);
             }
         })
+    })
+    //监听
+    $(document).on("DOMNodeInserted", function(){
+        console.log('is');
+    })
+    $(document).on("DOMNodeRemoved", function(){
+        console.log('rm');
     })
 })
