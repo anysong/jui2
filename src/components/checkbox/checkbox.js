@@ -97,5 +97,7 @@ $(function () {
                 console.log(2);
             }
         })
+
+        $('body').append('<input type="checkbox" class="zr-checkbox">')
     })
 })
