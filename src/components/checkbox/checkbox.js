@@ -21,6 +21,12 @@ $(function () {
 
         var $parent = $original.parent(),
             $label = $original.closest('label');
+        
+        if(_value.length == 0){
+            $parent.siblings('.zr-checkbox-label').css('display','none');
+        }else {
+            $parent.siblings('.zr-checkbox-label').css('display','inline');
+        }
         //已选中
         if(_checked){
             $parent.addClass('jui-checkbox-checked');
@@ -47,7 +53,13 @@ $(function () {
             for(var name in opt){
                 if(name === 'checked') $input.prop('checked', opt[name]);
                 if(name === 'disabled') $input.prop('disabled', opt[name]);
-                if(name === 'value') $parent.siblings('span').html(opt[name]);
+                if(name === 'value') {
+                    if(opt[name].length == 0){
+                        $parent.siblings('.zr-checkbox-label').css('display','none');
+                    }else {
+                        $parent.siblings('.zr-checkbox-label').css('display','inline').html(opt[name]);
+                    }
+                };
             }
             if(opt.beforeFn) opt.beforeFn();
             //选中
