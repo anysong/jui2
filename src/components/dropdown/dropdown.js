@@ -20,10 +20,16 @@ $(function () {
                 $element.removeClass('open');
             })
         }
-        //组织冒泡
+        //阻止冒泡
         $element.on('click','.jui-dropdown-menu',function(ev){
             ev.stopPropagation();
         })
+        //事件
+        $element.on('click','.jui-dropdown-item',function(ev){
+            ev.stopPropagation();
+            //opt.callback
+        })
+        
     })
      //全局
     $(document).on('click', function(){
