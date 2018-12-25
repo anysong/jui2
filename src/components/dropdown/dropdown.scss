@@ -148,6 +148,7 @@ $jui-hover-color: #40a9ff;
         opacity: 0;
         outline: none;
         list-style-type: none;
+        list-style: none;
         padding: 4px 0;
         margin: 0;
         text-align: left;
@@ -162,6 +163,9 @@ $jui-hover-color: #40a9ff;
         .jui-dropdown-item {
             &:hover {
                 background-color: #e6f7ff;
+                >.jui-dropdown-child-menu {
+                    display: block;
+                }
             }
             &.jui-dropdown-item-disabled {
                 background: rgba(255,255,255,.35);
@@ -170,6 +174,7 @@ $jui-hover-color: #40a9ff;
                     cursor: not-allowed;
                 }
             }
+            position: relative;
             padding: 5px 12px;
             margin: 0;
             clear: both;
@@ -191,6 +196,24 @@ $jui-hover-color: #40a9ff;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+            .jui-dropdown-child-menu {
+                position: absolute;
+                left: 100%;
+                top: 0;
+                list-style: none;
+                padding: 4px 0;
+                margin: 0;
+                outline: none;
+                text-align: left;
+                background-color: #fff;
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                background-clip: padding-box;
+                transition: all .3s;
+                z-index: 2;
+                margin-bottom: 6px;
+                display: none;
             }
         }
 
