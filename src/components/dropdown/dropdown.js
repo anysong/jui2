@@ -2,10 +2,36 @@
 $(function () {
     $('.jui-dropdown').each(function (index, element) {
         var $element = $(element),
-            event = $element.attr('data-event');
-
-        //点击
-        if (event === 'click') {
+            $link = $element.children('.jui-dropdown-link'),
+            $menu = $element.children('.jui-dropdown-menu');
+        
+        var droptype = $element.attr('data-droptype'),
+            menuwidth = $element.attr('data-menuwidth');
+        
+        //绑定事件
+        //addEvent(element);
+        //整体禁用
+        if($element.hasClass('jui-dropdown-disabled')){
+            return;
+        }
+        
+        //事件委托 阻止冒泡
+        $element.on('click', '.jui-dropdown-item-disabled', function(ev){
+            ev.stopPropagation();
+            return false;
+        })
+        $element.on('click','.jui-dropdown-item',function(ev){
+            ev.stopPropagation();
+        })
+        
+        
+        //自定义属性
+        //展开框宽度限定
+        if(menuwidth){
+            $menu.css('width', menuwidth);
+        }
+        //展开方式
+        if (droptype === 'click') {
             $element.on('click', function (ev) {
                 ev.stopPropagation();
                 $element.hasClass('open') ? $element.removeClass('open') : $element.addClass('open');
@@ -20,23 +46,15 @@ $(function () {
                 $element.removeClass('open');
             })
         }
-        //阻止冒泡
-        $element.on('click','.jui-dropdown-menu',function(ev){
-            ev.stopPropagation();
-        })
-        //事件
-        $element.on('click','.jui-dropdown-item',function(ev){
-            ev.stopPropagation();
-            //opt.callback
-        })
-        // <Dropdown overlay={menu} placement="bottomLeft">
-        //     <Button>bottomLeft</Button>
-        // </Dropdown>
-        // <Dropdown overlay={menu} placement="bottomCenter">
-        //     <Button>bottomCenter</Button>
-        // </Dropdown>
-        
     })
+    //绑定自定义事件
+    function addEvent(dom) {
+        dom.onzrchange = function (option) {
+            var opt = option || {};
+            if(opt.beforeFn) opt.beforeFn.call(this);
+            if(opt.afterFn) opt.afterFn.call(this);
+        }
+    }
      //全局
     $(document).on('click', function(){
         $('.jui-dropdown').each(function (index, element) {

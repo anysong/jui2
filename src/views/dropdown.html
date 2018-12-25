@@ -15,29 +15,31 @@
 <body>
     <div>dropdown</div>
     <!-- click -->
-    <div>
+    <div class="zr-col-24">
+        
         <h4>Click</h4>
-        <div class="jui-dropdown" data-event="click">
+        <input type="text" class="zr-input zr-col-12">
+        <div class="jui-dropdown" data-droptype="click" data-menuwidth="90px">
             <a class="jui-dropdown-link" href="javascript:;">Click1<!---->
                 <i class="jui-icon-angle jui-icon-down"></i>
             </a>
             <div class="jui-dropdown-menu">
+                <li class="jui-dropdown-item jui-dropdown-item-disabled">
+                    <a href="//zr.jd.com" >Action</a>
+                </li>
                 <li class="jui-dropdown-item">
-                    <a href="javascript:;">Action</a>
+                    <a href="//zr.jd.com" >Action</a>
                 </li>
                 <li class="jui-dropdown-item">
                     <a href="javascript:;">Action</a>
                 </li>
-                <li class="jui-dropdown-item">
-                    <a href="javascript:;">Action</a>
-                </li>
-                <div class="jui-dropdown-divider"></div>
+                <li class="jui-dropdown-item-divider"></li>
                 <li class="jui-dropdown-item">
                     <a href="javascript:;">Action</a>
                 </li>
             </div>
         </div>
-        <div class="jui-dropdown jui-dropdown-up" data-event="click">
+        <div class="jui-dropdown jui-dropdown-up" data-droptype="click">
             <a class="jui-dropdown-link" href="javascript:;">Click2<!---->
                 <i class="jui-icon-angle jui-icon-down"></i>
             </a>
@@ -105,7 +107,7 @@
     <!-- btn click -->
     <div>
         <h4>Button Click</h4>
-        <div class="jui-dropdown jui-dropdown-btn" data-event="click">
+        <div class="jui-dropdown jui-dropdown-btn" data-droptype="click">
             <a class="jui-dropdown-link" href="javascript:;">Click1<!---->
                 <i class="jui-icon-angle jui-icon-down"></i>
             </a>
@@ -125,7 +127,7 @@
                 </li>
             </div>
         </div>
-        <div class="jui-dropdown jui-dropdown-up jui-dropdown-btn jui-dropdown-equal" data-event="click">
+        <div class="jui-dropdown jui-dropdown-up jui-dropdown-btn jui-dropdown-equal" data-droptype="click">
             <a class="jui-dropdown-link" href="javascript:;">Click2<!---->
                 <i class="jui-icon-angle jui-icon-down"></i>
             </a>
@@ -194,7 +196,7 @@
    <!-- click -->
    <div>
     <h4>Option</h4>
-    <div class="jui-dropdown jui-dropdown-equal" data-event="click">
+    <div class="jui-dropdown jui-dropdown-equal" data-droptype="click">
         <a class="jui-dropdown-link" href="javascript:;">Click1Click1Click1Click1<!---->
             <i class="jui-icon-angle jui-icon-down"></i>
         </a>
@@ -214,7 +216,7 @@
             </li>
         </div>
     </div>
-    <div class="jui-dropdown jui-dropdown-up" data-event="click">
+    <div class="jui-dropdown jui-dropdown-up" data-droptype="click">
         <a class="jui-dropdown-link" href="javascript:;">Click2<!---->
             <i class="jui-icon-angle jui-icon-down"></i>
         </a>

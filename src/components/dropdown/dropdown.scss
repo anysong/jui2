@@ -1,4 +1,5 @@
 $jui-color: #4363f4;
+$jui-hover-color: #40a9ff;
 
 .jui-dropdown {
     padding: 0 4px;
@@ -34,8 +35,11 @@ $jui-color: #4363f4;
         line-height: 32px;
         font-size: 14px;
         font-weight: 400;
+        transition: border-color .3s ease;
         cursor: pointer;
-
+        &:hover {
+            border-color: $jui-hover-color;
+        }
         //向上展开&按钮样式
         &.jui-dropdown-up {
             .jui-dropdown-menu {
@@ -44,7 +48,6 @@ $jui-color: #4363f4;
                 transform-origin: center bottom 0px;
             }
         }
-
         .jui-dropdown-menu {
             top: 34px;
             transform-origin: center top 0px;
@@ -85,6 +88,20 @@ $jui-color: #4363f4;
             }
         }
     }
+    //禁用
+    &.jui-dropdown-disabled {
+        background-color: #f5f5f5;
+        border-color: #d9d9d9;
+        .jui-dropdown-link {
+            color: rgba(0,0,0,0.25);
+            &:hover {
+                color: rgba(0,0,0,0.25);
+            }
+        }
+        .jui-dropdown-menu {
+            display: none;
+        }
+    }
     ////
     .jui-dropdown-link {
         text-decoration: none;
@@ -92,9 +109,9 @@ $jui-color: #4363f4;
         color: $jui-color;
         font-size: 14px;
         transition: color .3s ease;
-
+        white-space: nowrap;
         &:hover {
-            color: #40a9ff;
+            color: $jui-hover-color;
         }
 
         .jui-icon-angle {
@@ -122,7 +139,6 @@ $jui-color: #4363f4;
             }
         }
     }
-
     .jui-dropdown-menu {
         position: absolute;
         top: 22px;
@@ -144,6 +160,16 @@ $jui-color: #4363f4;
         margin-bottom: 6px;
 
         .jui-dropdown-item {
+            &:hover {
+                background-color: #e6f7ff;
+            }
+            &.jui-dropdown-item-disabled {
+                background: rgba(255,255,255,.35);
+                a {
+                    color: rgba(0,0,0,.25);
+                    cursor: not-allowed;
+                }
+            }
             padding: 5px 12px;
             margin: 0;
             clear: both;
@@ -155,11 +181,6 @@ $jui-color: #4363f4;
             line-height: 22px;
             box-sizing: border-box;
             cursor: pointer;
-
-            &:hover {
-                background-color: #e6f7ff;
-            }
-
             a {
                 color: rgba(0, 0, 0, 0.65);
                 display: block;
@@ -167,9 +188,18 @@ $jui-color: #4363f4;
                 margin: 0;
                 transition: all .3s;
                 text-decoration: none;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
 
-        .jui-dropdown-divider {}
+        .jui-dropdown-item-divider {
+            height: 1px;
+            overflow: hidden;
+            background-color: #e8e8e8;
+            line-height: 0;
+            margin: 4px 0;
+        }
     }
 }
