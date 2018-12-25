@@ -7,7 +7,7 @@ $(function () {
         
         var droptype = $element.attr('data-droptype'),
             menuwidth = $element.attr('data-menuwidth'),
-            menuheight = $element.attr('data-menuheight');
+            menuheight = $element.attr('data-menuheight'),
             autodrop = $element.attr('data-autodrop');
         
         //绑定事件
@@ -35,12 +35,33 @@ $(function () {
         if(menuheight){
             $menu.css('height', menuheight);
         }
-        if(autodrop){
-            //根据视窗距离屏幕上下距离,决定向上展示还是向下展示.
+        var autoHeight = function(){
+             //根据视窗距离屏幕上下距离,决定向上展示还是向下展示.
+             console.log('element_h', $element.offset().top);
+             console.log('window_h', $(window).height());
+             console.log('scroll_h', $(document).scrollTop());
+             console.log('menu_h', $menu.height());
+ 
+             var element_h = $element.offset().top,
+                 window_h = $(window).height(),
+                 scroll_h = $(document).scrollTop(),
+                 menu_h = $menu.height();
+             //向上翻折
+             var bottom_h = window_h - element_h - scroll_h;
+             console.log('bottom_h',bottom_h);
+             if(bottom_h < menu_h){
+                 console.log('上开');
+                 $element.addClass('jui-dropdown-up');
+             }else {
+                 console.log('下开');
+                 $element.removeClass('jui-dropdown-up');
+             }
         }
+       
         //展开方式
         if (droptype === 'click') {
             $element.on('click', function (ev) {
+                autoHeight(); //
                 ev.stopPropagation();
                 $element.hasClass('open') ? $element.removeClass('open') : $element.addClass('open');
             })
