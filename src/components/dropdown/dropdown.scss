@@ -15,7 +15,7 @@ $jui-color: #4363f4;
             opacity: 1;
             transform: scale(1, 1);
         }
-        &.jui-dropup {
+        &.jui-dropdown-up {
             .jui-dropdown-link {
                 .jui-icon-angle {
                     transform: rotate(45deg);
@@ -37,7 +37,7 @@ $jui-color: #4363f4;
         cursor: pointer;
 
         //向上展开&按钮样式
-        &.jui-dropup {
+        &.jui-dropdown-up {
             .jui-dropdown-menu {
                 bottom: 34px;
                 top: auto;
@@ -51,7 +51,7 @@ $jui-color: #4363f4;
         }
     }
     //向上展开
-    &.jui-dropup {
+    &.jui-dropdown-up {
         .jui-dropdown-link {
             .jui-icon-angle {
                 transform: rotate(225deg);
@@ -61,9 +61,30 @@ $jui-color: #4363f4;
             top: auto;
             bottom: 20px;
             transform-origin: center bottom 0px;
+            margin-bottom: 0;
         }
     }
-
+    //下拉右对齐
+    &.jui-dropdown-right {
+        .jui-dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    }
+    //等宽度-内容不能超出宽度
+    &.jui-dropdown-equal {
+        .jui-dropdown-menu {
+            right: 0;
+            left: 0;
+            .jui-dropdown-item {
+                a {
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+    }
     ////
     .jui-dropdown-link {
         text-decoration: none;
@@ -120,6 +141,7 @@ $jui-color: #4363f4;
         background-clip: padding-box;
         transition: all .3s;
         z-index: 2;
+        margin-bottom: 6px;
 
         .jui-dropdown-item {
             padding: 5px 12px;
@@ -131,6 +153,7 @@ $jui-color: #4363f4;
             white-space: nowrap;
             transition: all .3s;
             line-height: 22px;
+            box-sizing: border-box;
             cursor: pointer;
 
             &:hover {
@@ -140,8 +163,8 @@ $jui-color: #4363f4;
             a {
                 color: rgba(0, 0, 0, 0.65);
                 display: block;
-                padding: 5px 12px;
-                margin: -5px -12px;
+                padding: 0;
+                margin: 0;
                 transition: all .3s;
                 text-decoration: none;
             }

@@ -29,6 +29,12 @@ $(function () {
             ev.stopPropagation();
             //opt.callback
         })
+        // <Dropdown overlay={menu} placement="bottomLeft">
+        //     <Button>bottomLeft</Button>
+        // </Dropdown>
+        // <Dropdown overlay={menu} placement="bottomCenter">
+        //     <Button>bottomCenter</Button>
+        // </Dropdown>
         
     })
      //全局
