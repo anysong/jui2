@@ -6,7 +6,9 @@ $(function () {
             $menu = $element.children('.jui-dropdown-menu');
         
         var droptype = $element.attr('data-droptype'),
-            menuwidth = $element.attr('data-menuwidth');
+            menuwidth = $element.attr('data-menuwidth'),
+            menuheight = $element.attr('data-menuheight');
+            autodrop = $element.attr('data-autodrop');
         
         //绑定事件
         //addEvent(element);
@@ -29,6 +31,12 @@ $(function () {
         //展开框宽度限定
         if(menuwidth){
             $menu.css('width', menuwidth);
+        }
+        if(menuheight){
+            $menu.css('height', menuheight);
+        }
+        if(autodrop){
+            //根据视窗距离屏幕上下距离,决定向上展示还是向下展示.
         }
         //展开方式
         if (droptype === 'click') {
