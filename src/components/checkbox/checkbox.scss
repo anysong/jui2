@@ -1,4 +1,4 @@
-$jui-color: #4363f4;
+$zr-color: #4363f4;
 input[type='checkbox'][disabled],
 input[type='checkbox'][disabled],
 input[type='checkbox'].disabled,
@@ -6,7 +6,7 @@ input[type='checkbox'].disabled {
     cursor: not-allowed
 }
 
-.jui-checkbox-wrapper {
+.zr-checkbox-wrapper {
     position: relative;
     display: inline-block;
     font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
@@ -22,21 +22,21 @@ input[type='checkbox'].disabled {
     outline: none;
     margin-right: 8px;
     cursor: pointer;
-    &.jui-checkbox-wrapper-checked {
+    &.zr-checkbox-wrapper-checked {
 
     }
     &:hover {
-        .jui-checkbox-style {
-            .jui-checkbox-inner {
-                border-color: $jui-color;
+        .zr-checkbox-style {
+            .zr-checkbox-inner {
+                border-color: $zr-color;
             }
         }
     }
-    .jui-checkbox-clone {
-        &.jui-checkbox-checked {
-            .jui-checkbox-inner {
-                border-color: $jui-color;
-                background-color: $jui-color;
+    .zr-checkbox-clone {
+        &.zr-checkbox-checked {
+            .zr-checkbox-inner {
+                border-color: $zr-color;
+                background-color: $zr-color;
                 &:after {
                     transform: rotate(45deg) scale(1);
                     opacity: 1;
@@ -44,8 +44,8 @@ input[type='checkbox'].disabled {
                 }
             }
         }
-        &.jui-checkbox-disabled {
-            .jui-checkbox-inner {
+        &.zr-checkbox-disabled {
+            .zr-checkbox-inner {
                 border-color: #d9d9d9 !important;
                 background-color: #f5f5f5;
                 cursor: not-allowed;
@@ -55,8 +55,8 @@ input[type='checkbox'].disabled {
             }
         }
         &:hover {
-            .jui-checkbox-inner {
-                border-color: $jui-color;
+            .zr-checkbox-inner {
+                border-color: $zr-color;
             }
         }
         position: relative;
@@ -75,7 +75,7 @@ input[type='checkbox'].disabled {
         vertical-align: sub; //sub
         cursor: pointer;
         // 代糖
-        .jui-checkbox-inner {
+        .zr-checkbox-inner {
             position: relative;
             box-sizing: border-box; //ant-no
             top: 0;
@@ -109,7 +109,7 @@ input[type='checkbox'].disabled {
             }
         }
         // 源生
-        .jui-checkbox-original {
+        .zr-checkbox-original {
             position: absolute;
             opacity: 0;
             top: 0;
@@ -122,7 +122,7 @@ input[type='checkbox'].disabled {
             cursor: pointer;
         }
     }
-    .jui-checkbox-label {
+    .zr-checkbox-label {
         font-size: 14px;
         padding-left: 8px;
         padding-right: 8px;

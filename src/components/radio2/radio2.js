@@ -1,6 +1,6 @@
-//jui-radio
+//zr-radio
 $(function () {
-    $('.jui-radio').each(function (index, element) {
+    $('.zr-radio').each(function (index, element) {
         var $original = $(element);
         var _checked = $original.prop('checked'),
             _disabled = $original.prop('disabled'),
@@ -25,18 +25,18 @@ $(function () {
             $original.prop('id', _id);
         }
 
-        var html = '<label class="jui-radio-wrapper" for="' + _id + '">' +
-            '<span class="jui-radio-clone">' +
-            '<span class="jui-radio-inner"></span>' +
+        var html = '<label class="zr-radio-wrapper" for="' + _id + '">' +
+            '<span class="zr-radio-clone">' +
+            '<span class="zr-radio-inner"></span>' +
             '</span>' +
-            '<span class="jui-radio-label">' + _value +
+            '<span class="zr-radio-label">' + _value +
             '</span>' +
             '</label>';
         var $label = $(html)
         $original.after($label);
         $original.css('display', 'none');
         
-        var $clone = $label.children('.jui-radio-clone'),
+        var $clone = $label.children('.zr-radio-clone'),
             $text = $clone.siblings('.zr-radio-label');
 
         if (_value.length == 0) {
@@ -46,13 +46,13 @@ $(function () {
         }
         //已选中
         if (_checked) {
-            $clone.addClass('jui-radio-checked');
-            $label.addClass('jui-radio-wrapper-checked');
+            $clone.addClass('zr-radio-checked');
+            $label.addClass('zr-radio-wrapper-checked');
         }
         //已禁用
         if (_disabled) {
-            $clone.addClass('jui-radio-disabled');
-            $label.addClass('jui-radio-wrapper-disabled');
+            $clone.addClass('zr-radio-disabled');
+            $label.addClass('zr-radio-wrapper-disabled');
         }
         addEvent(element) //绑定事件
     })
@@ -65,7 +65,7 @@ $(function () {
             var $input = $(this),
                 _id = $input.prop('id'),
                 $label = $input.siblings('[for="' + _id + '"]'),
-                $clone = $label.children('.jui-radio-clone'),
+                $clone = $label.children('.zr-radio-clone'),
                 original = this,
                 inputName = $input.prop('name');
             var opt = option || {};
@@ -84,8 +84,8 @@ $(function () {
             if (opt.beforeFn) opt.beforeFn.call(this);
             //选中
             if ($input.prop('checked')) {
-                $clone.addClass('jui-radio-checked');
-                $label.addClass('jui-radio-wrapper-checked');
+                $clone.addClass('zr-radio-checked');
+                $label.addClass('zr-radio-wrapper-checked');
                 //其他项目取消选中
                 var aInput = $('input[name=' + inputName + ']');
                 aInput.each(function (i, element) {
@@ -94,16 +94,16 @@ $(function () {
                     }
                 })
             } else {
-                $clone.removeClass('jui-radio-checked');
-                $label.removeClass('jui-radio-wrapper-checked');
+                $clone.removeClass('zr-radio-checked');
+                $label.removeClass('zr-radio-wrapper-checked');
             }
             //禁用
             if ($input.prop('disabled')) {
-                $clone.addClass('jui-radio-disabled');
-                $label.addClass('jui-radio-wrapper-disabled');
+                $clone.addClass('zr-radio-disabled');
+                $label.addClass('zr-radio-wrapper-disabled');
             } else {
-                $clone.removeClass('jui-radio-disabled');
-                $label.removeClass('jui-radio-wrapper-disabled');
+                $clone.removeClass('zr-radio-disabled');
+                $label.removeClass('zr-radio-wrapper-disabled');
             }
 
             if (opt.afterFn) opt.afterFn.call(this);

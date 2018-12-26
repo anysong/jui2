@@ -1,7 +1,7 @@
 {
-  "name": "jui2",
+  "name": "zr2",
   "version": "1.0.0",
-  "description": "jui2.0",
+  "description": "zr2.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anysong/jui2.git"
+    "url": "git+https://github.com/anysong/zr2.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/anysong/jui2/issues"
+    "url": "https://github.com/anysong/zr2/issues"
   },
-  "homepage": "https://github.com/anysong/jui2#readme",
+  "homepage": "https://github.com/anysong/zr2#readme",
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",

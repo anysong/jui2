@@ -1,9 +1,9 @@
-//jui-dropdown
+//zr-dropdown
 $(function () {
-    $('.jui-dropdown').each(function (index, element) {
+    $('.zr-dropdown').each(function (index, element) {
         var $element = $(element),
-            $link = $element.children('.jui-dropdown-link'),
-            $menu = $element.children('.jui-dropdown-menu');
+            $link = $element.children('.zr-dropdown-link'),
+            $menu = $element.children('.zr-dropdown-menu');
 
         var type = $element.attr('data-type'),
             menuwidth = $element.attr('data-menuwidth'),
@@ -13,16 +13,16 @@ $(function () {
             closeresize = $element.attr('data-close-resize');
 
         //整体禁用
-        if ($element.hasClass('jui-dropdown-disabled')) {
+        if ($element.hasClass('zr-dropdown-disabled')) {
             return;
         }
 
         //事件委托 阻止冒泡
-        $element.on('click', '.jui-dropdown-item-disabled', function (ev) {
+        $element.on('click', '.zr-dropdown-item-disabled', function (ev) {
             ev.stopPropagation();
             return false;
         })
-        $element.on('click', '.jui-dropdown-item', function (ev) {
+        $element.on('click', '.zr-dropdown-item', function (ev) {
             ev.stopPropagation();
         })
 
@@ -52,11 +52,11 @@ $(function () {
                 top_h = window_h - bottom_h - element_h;
 
             if (menu_h < bottom_h) {
-                $element.removeClass('jui-dropdown-up'); //down
+                $element.removeClass('zr-dropdown-up'); //down
             } else if (menu_h < top_h) {
-                $element.addClass('jui-dropdown-up'); //up
+                $element.addClass('zr-dropdown-up'); //up
             } else {
-                $element.removeClass('jui-dropdown-up'); //down
+                $element.removeClass('zr-dropdown-up'); //down
             }
         }
         $(window).scroll(function () {
@@ -88,7 +88,7 @@ $(function () {
     })
     //全局
     $(document).on('click', function () {
-        $('.jui-dropdown').each(function (index, element) {
+        $('.zr-dropdown').each(function (index, element) {
             var $element = $(element);
             $element.removeClass('open');
         })

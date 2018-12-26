@@ -1,23 +1,23 @@
-//jui-checkbox
+//zr-checkbox
 $(function () {
-    $('.jui-checkbox').each(function (index, element) {
+    $('.zr-checkbox').each(function (index, element) {
         var $original = $(element);
         var _checked = $original.prop('checked'),
             _disabled = $original.prop('disabled'),
             _value = $original.prop('value');
         
-        var html = '<label class="jui-checkbox-wrapper">' +
-            '<span class="jui-checkbox-clone">' +
-            '<span class="jui-checkbox-inner"></span>' +
+        var html = '<label class="zr-checkbox-wrapper">' +
+            '<span class="zr-checkbox-clone">' +
+            '<span class="zr-checkbox-inner"></span>' +
             '</span>' +
-            '<span class="jui-checkbox-label">' + _value +
+            '<span class="zr-checkbox-label">' + _value +
             '</span>' +
             '</label>';
         var $shell = $(html);
         $original.after($shell);
-        $shell.children('.jui-checkbox-clone').append(element);
-        $original.addClass('jui-checkbox-original');
-        $original.removeClass('jui-checkbox');
+        $shell.children('.zr-checkbox-clone').append(element);
+        $original.addClass('zr-checkbox-original');
+        $original.removeClass('zr-checkbox');
 
         var $parent = $original.parent(),
             $label = $original.closest('label');
@@ -29,13 +29,13 @@ $(function () {
         }
         //已选中
         if(_checked){
-            $parent.addClass('jui-checkbox-checked');
-            $label.addClass('jui-checkbox-wrapper-checked');
+            $parent.addClass('zr-checkbox-checked');
+            $label.addClass('zr-checkbox-wrapper-checked');
         }
         //已禁用
         if(_disabled){
-            $parent.addClass('jui-checkbox-disabled');
-            $label.addClass('jui-checkbox-wrapper-disabled');
+            $parent.addClass('zr-checkbox-disabled');
+            $label.addClass('zr-checkbox-wrapper-disabled');
         }
         addEvent(element) //绑定事件
     })
@@ -64,20 +64,20 @@ $(function () {
             if(opt.beforeFn) opt.beforeFn.call(this);
             //选中
             if ($input.prop('checked')) {
-                $parent.addClass('jui-checkbox-checked');
-                $label.addClass('jui-checkbox-wrapper-checked');
+                $parent.addClass('zr-checkbox-checked');
+                $label.addClass('zr-checkbox-wrapper-checked');
             }else {
-                $parent.removeClass('jui-checkbox-checked');
-                $label.removeClass('jui-checkbox-wrapper-checked');
+                $parent.removeClass('zr-checkbox-checked');
+                $label.removeClass('zr-checkbox-wrapper-checked');
             }
            
             //禁用
             if ($input.prop('disabled')) {
-                $parent.addClass('jui-checkbox-disabled');
-                $label.addClass('jui-checkbox-wrapper-disabled');
+                $parent.addClass('zr-checkbox-disabled');
+                $label.addClass('zr-checkbox-wrapper-disabled');
             }else {
-                $parent.removeClass('jui-checkbox-disabled');
-                $label.removeClass('jui-checkbox-wrapper-disabled');
+                $parent.removeClass('zr-checkbox-disabled');
+                $label.removeClass('zr-checkbox-wrapper-disabled');
             }
 
             if(opt.afterFn) opt.afterFn.call(this);
