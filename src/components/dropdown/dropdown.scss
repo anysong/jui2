@@ -37,8 +37,14 @@ $jui-hover-color: #40a9ff;
         font-weight: 400;
         transition: border-color .3s ease;
         cursor: pointer;
+        .jui-dropdown-link {
+            color: rgba(0,0,0,0.65);
+        }
         &:hover {
             border-color: $jui-hover-color;
+            .jui-dropdown-link {
+                color: $jui-hover-color;
+            }
         }
         //向上展开&按钮样式
         &.jui-dropdown-up {
@@ -159,7 +165,15 @@ $jui-hover-color: #40a9ff;
         transition: all .3s;
         z-index: 2;
         margin-bottom: 6px;
-
+        &:before {
+            position: absolute;
+            top: -7px;
+            left: -7px;
+            right: 0;
+            bottom: -7px;
+            content: ' ';
+            opacity: .0001;
+        }
         .jui-dropdown-item {
             &:hover {
                 background-color: #e6f7ff;
