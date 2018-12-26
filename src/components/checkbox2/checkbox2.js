@@ -10,23 +10,22 @@ $(function () {
             _name = $original.prop('name'),
             all = $original.attr('data-all');
 
-        var update = function ($input, name) {
-            if (name) {
-                var $aCheckbox = $('input[name="' + name + '"]');
-                //是否当前为全选
-                if (all) {
-                    $aCheckbox.each(function (index, element) {
-                        if (element !== original) {
-                            console.log('ee',element);
-                            $(element).prop('checked', true);
-                        }
-                    })
-                } else {
+        //全选
+        // if (_name) {
+        //     var $aCheckbox = $('input[name="' + _name + '"]');
+        //     //是否当前为全选
+        //     if (all) {
+        //         $aCheckbox.each(function (index, element) {
+        //             console.log(element)
+        //             if (element !== original) {
+        //                 element.onzrchange ? element.onzrchange({
+        //                     checked: true
+        //                 }) : '';
+        //             }
+        //         })
+        //     }
+        // }
 
-                }
-            }
-        }
-        
         var uuid = function () {
             var s = [];
             var hexDigits = "0123456789abcdef";
@@ -73,9 +72,8 @@ $(function () {
             $clone.addClass('zr-checkbox-disabled');
             $label.addClass('zr-checkbox-wrapper-disabled');
         }
-        
+
         addEvent(element) //绑定事件
-        update($original, _name);
     })
     //绑定自定义事件
     function addEvent(dom) {
@@ -84,6 +82,9 @@ $(function () {
         })
         dom.onzrchange = function (option) {
             var $input = $(this),
+                input = this,
+                _name = $input.prop('name'),
+                all = $input.attr('data-all'),
                 _id = $input.prop('id'),
                 $label = $input.siblings('[for="' + _id + '"]'),
                 $clone = $label.children('.zr-checkbox-clone');
@@ -118,7 +119,21 @@ $(function () {
                 $clone.removeClass('zr-checkbox-disabled');
                 $label.removeClass('zr-checkbox-wrapper-disabled');
             }
-
+            //全选
+            if (_name) {
+                var $aCheckbox = $('input[name="' + _name + '"]');
+                //是否当前为全选
+                if (all) {
+                    $aCheckbox.each(function (index, element) {
+                        console.log(element)
+                        if (element !== input) {
+                            element.onzrchange ? element.onzrchange({
+                                checked: $input.prop('checked')
+                            }) : '';
+                        }
+                    })
+                }
+            }
             if (opt.afterFn) opt.afterFn.call(this);
         }
     }
