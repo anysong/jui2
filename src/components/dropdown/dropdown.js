@@ -5,7 +5,7 @@ $(function () {
             $link = $element.children('.jui-dropdown-link'),
             $menu = $element.children('.jui-dropdown-menu');
 
-        var droptype = $element.attr('data-droptype'),
+        var type = $element.attr('data-type'),
             menuwidth = $element.attr('data-menuwidth'),
             menuheight = $element.attr('data-menuheight'),
             closeauto = $element.attr('data-close-auto'),
@@ -68,7 +68,7 @@ $(function () {
         //初始化
         if (!closeauto) autoHeight();
         //展开方式
-        if (droptype === 'click') {
+        if (type === 'click') {
             $element.on('click', function (ev) {
                 ev.stopPropagation();
                 if (!closeauto) autoHeight();
