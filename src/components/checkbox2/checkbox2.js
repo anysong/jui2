@@ -1,12 +1,32 @@
 //zr-checkbox
 $(function () {
     $('.zr-checkbox').each(function (index, element) {
-        var $original = $(element);
+        var $original = $(element),
+            original = element;
         var _checked = $original.prop('checked'),
             _disabled = $original.prop('disabled'),
             _id = $original.prop('id'),
-            _value = $original.prop('value');
+            _value = $original.prop('value'),
+            _name = $original.prop('name'),
+            all = $original.attr('data-all');
 
+        var update = function ($input, name) {
+            if (name) {
+                var $aCheckbox = $('input[name="' + name + '"]');
+                //是否当前为全选
+                if (all) {
+                    $aCheckbox.each(function (index, element) {
+                        if (element !== original) {
+                            console.log('ee',element);
+                            $(element).prop('checked', true);
+                        }
+                    })
+                } else {
+
+                }
+            }
+        }
+        
         var uuid = function () {
             var s = [];
             var hexDigits = "0123456789abcdef";
@@ -24,7 +44,7 @@ $(function () {
             checkOnly();
             $original.prop('id', _id);
         }
-        var html = '<label class="zr-checkbox-wrapper">' +
+        var html = '<label class="zr-checkbox-wrapper" for="' + _id + '">' +
             '<span class="zr-checkbox-clone">' +
             '<span class="zr-checkbox-inner"></span>' +
             '</span>' +
@@ -53,7 +73,9 @@ $(function () {
             $clone.addClass('zr-checkbox-disabled');
             $label.addClass('zr-checkbox-wrapper-disabled');
         }
+        
         addEvent(element) //绑定事件
+        update($original, _name);
     })
     //绑定自定义事件
     function addEvent(dom) {
