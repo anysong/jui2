@@ -19,12 +19,13 @@ $(function () {
         $original.addClass('zr-radio-original');
         $original.removeClass('zr-radio');
 
-        var $clone = $original.parent();
+        var $clone = $original.parent(),
+            $text = $clone.siblings('.zr-radio-label');
         
         if(_value.length == 0){
-            $clone.siblings('.zr-radio-label').css('display','none');
+            $text.css('display','none');
         }else {
-            $clone.siblings('.zr-radio-label').css('display','inline');
+            $text.css('display','inline');
         }
         //已选中
         if(_checked){

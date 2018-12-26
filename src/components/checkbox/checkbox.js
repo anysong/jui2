@@ -13,28 +13,28 @@ $(function () {
             '<span class="zr-checkbox-label">' + _value +
             '</span>' +
             '</label>';
-        var $shell = $(html);
-        $original.after($shell);
-        $shell.children('.zr-checkbox-clone').append(element);
+        var $label = $(html);
+        $original.after($label);
+        $label.children('.zr-checkbox-clone').append(element);
         $original.addClass('zr-checkbox-original');
         $original.removeClass('zr-checkbox');
 
-        var $parent = $original.parent(),
-            $label = $original.closest('label');
+        var $clone = $original.parent(),
+            $text = $clone.siblings('.zr-checkbox-label');
         
         if(_value.length == 0){
-            $parent.siblings('.zr-checkbox-label').css('display','none');
+            $text.css('display','none');
         }else {
-            $parent.siblings('.zr-checkbox-label').css('display','inline');
+            $text.css('display','inline');
         }
         //已选中
         if(_checked){
-            $parent.addClass('zr-checkbox-checked');
+            $clone.addClass('zr-checkbox-checked');
             $label.addClass('zr-checkbox-wrapper-checked');
         }
         //已禁用
         if(_disabled){
-            $parent.addClass('zr-checkbox-disabled');
+            $clone.addClass('zr-checkbox-disabled');
             $label.addClass('zr-checkbox-wrapper-disabled');
         }
         addEvent(element) //绑定事件
@@ -46,7 +46,7 @@ $(function () {
         })
         dom.onzrchange = function (option) {
             var $input = $(this),
-                $parent = $input.parent(),
+                $clone = $input.parent(),
                 $label = $input.closest('label');
             var opt = option || {};
 
@@ -55,28 +55,28 @@ $(function () {
                 if(name === 'disabled') $input.prop('disabled', opt[name]);
                 if(name === 'value') {
                     if(opt[name].length == 0){
-                        $parent.siblings('.zr-checkbox-label').css('display','none');
+                        $clone.siblings('.zr-checkbox-label').css('display','none');
                     }else {
-                        $parent.siblings('.zr-checkbox-label').css('display','inline').html(opt[name]);
+                        $clone.siblings('.zr-checkbox-label').css('display','inline').html(opt[name]);
                     }
                 };
             }
             if(opt.beforeFn) opt.beforeFn.call(this);
             //选中
             if ($input.prop('checked')) {
-                $parent.addClass('zr-checkbox-checked');
+                $clone.addClass('zr-checkbox-checked');
                 $label.addClass('zr-checkbox-wrapper-checked');
             }else {
-                $parent.removeClass('zr-checkbox-checked');
+                $clone.removeClass('zr-checkbox-checked');
                 $label.removeClass('zr-checkbox-wrapper-checked');
             }
            
             //禁用
             if ($input.prop('disabled')) {
-                $parent.addClass('zr-checkbox-disabled');
+                $clone.addClass('zr-checkbox-disabled');
                 $label.addClass('zr-checkbox-wrapper-disabled');
             }else {
-                $parent.removeClass('zr-checkbox-disabled');
+                $clone.removeClass('zr-checkbox-disabled');
                 $label.removeClass('zr-checkbox-wrapper-disabled');
             }
 
