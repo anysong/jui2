@@ -88,7 +88,10 @@ $(function () {
                 _id = $input.prop('id'),
                 $label = $input.siblings('[for="' + _id + '"]'),
                 $clone = $label.children('.zr-checkbox-clone');
-            var opt = option || {};
+            var config = {
+                checkedall: false
+            }
+            var opt = $.extend({}, config, option);
 
             for (var name in opt) {
                 if (name === 'checked') $input.prop('checked', opt[name]);
@@ -119,25 +122,58 @@ $(function () {
                 $clone.removeClass('zr-checkbox-disabled');
                 $label.removeClass('zr-checkbox-wrapper-disabled');
             }
-            //全选
-            if (_name) {
-                var $aCheckbox = $('input[name="' + _name + '"]');
-                //是否当前为全选
+
+
+            var $checkAll = $('input[name="' + _name + '"][data-all="true"]'),
+                $aCheckItems = $('input[name="' + _name + '"][data-all!="true"]');
+
+            var checkedFn = function () {
                 if (all) {
-                    $aCheckbox.each(function (index, element) {
-                        console.log(element)
-                        if (element !== input) {
-                            element.onzrchange ? element.onzrchange({
-                                checked: $input.prop('checked')
-                            }) : '';
+                    //全选
+                    $aCheckItems.prop('checked', $checkAll.prop('checked'));
+                    $aCheckItems.each(function (index, element) {
+                        var $element = $(element),
+                            _id = $element.prop('id'),
+                            _checked = $element.prop('checked'),
+                            _$label = $('label[for="' + _id + '"]'),
+                            _$clone = _$label.children('.zr-checkbox-clone');
+                        if (_checked) {
+                            _$clone.addClass('zr-checkbox-checked');
+                            _$label.addClass('zr-checkbox-wrapper-checked');
+                        } else {
+                            _$clone.removeClass('zr-checkbox-checked');
+                            _$label.removeClass('zr-checkbox-wrapper-checked');
                         }
                     })
+                } else {
+                    var flag = $aCheckItems.length === $aCheckItems.filter(':checked').length;
+                    console.log(flag);
+                    $checkAll.prop('checked', flag);
+
+                    var $element = $checkAll,
+                        _id = $element.prop('id'),
+                        _checked = $element.prop('checked'),
+                        _$label = $('label[for="' + _id + '"]'),
+                        _$clone = _$label.children('.zr-checkbox-clone');
+                    if (_checked) {
+                        _$clone.addClass('zr-checkbox-checked');
+                        _$label.addClass('zr-checkbox-wrapper-checked');
+                    } else {
+                        _$clone.removeClass('zr-checkbox-checked');
+                        _$label.removeClass('zr-checkbox-wrapper-checked');
+                    }
                 }
             }
-            if (opt.afterFn) opt.afterFn.call(this);
+            checkedFn();
         }
     }
 
+    $('.js-all').on('click',function(){
+        // $('#m1')[0].onzrchange({
+        //     checked: true
+        // })
+        // $('#m1').prop('checked', true);
+    })
     $('.js-select').on('click', function () {
         //选中
         $('#id1')[0].onzrchange({
