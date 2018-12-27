@@ -1,30 +1,11 @@
 //zr-checkbox
 $(function () {
     $('.zr-checkbox').each(function (index, element) {
-        var $original = $(element),
-            original = element;
+        var $original = $(element);
         var _checked = $original.prop('checked'),
             _disabled = $original.prop('disabled'),
             _id = $original.prop('id'),
-            _value = $original.prop('value'),
-            _name = $original.prop('name'),
-            all = $original.attr('data-all');
-
-        //全选
-        // if (_name) {
-        //     var $aCheckbox = $('input[name="' + _name + '"]');
-        //     //是否当前为全选
-        //     if (all) {
-        //         $aCheckbox.each(function (index, element) {
-        //             console.log(element)
-        //             if (element !== original) {
-        //                 element.onzrchange ? element.onzrchange({
-        //                     checked: true
-        //                 }) : '';
-        //             }
-        //         })
-        //     }
-        // }
+            _value = $original.prop('value');
 
         var uuid = function () {
             var s = [];
@@ -122,8 +103,27 @@ $(function () {
                 $clone.removeClass('zr-checkbox-disabled');
                 $label.removeClass('zr-checkbox-wrapper-disabled');
             }
-
-
+            //全选
+            for (var name in opt) {
+                if (name === 'checkedAll') {
+                    var $checkboxAll = $('input[name="' + _name + '"]');
+                    $checkboxAll.each(function(i, element){
+                        var $element = $(element),
+                            _id = $element.prop('id'),
+                            _$label = $('label[for="' + _id + '"]'),
+                            _$clone = _$label.children('.zr-checkbox-clone');
+                        if (name) {
+                            _$clone.addClass('zr-checkbox-checked');
+                            _$label.addClass('zr-checkbox-wrapper-checked');
+                        } else {
+                            _$clone.removeClass('zr-checkbox-checked');
+                            _$label.removeClass('zr-checkbox-wrapper-checked');
+                        }
+                    })
+                    return
+                };
+            }
+            alert(2);
             var $checkAll = $('input[name="' + _name + '"][data-all="true"]'),
                 $aCheckItems = $('input[name="' + _name + '"][data-all!="true"]');
 
@@ -147,7 +147,6 @@ $(function () {
                     })
                 } else {
                     var flag = $aCheckItems.length === $aCheckItems.filter(':checked').length;
-                    console.log(flag);
                     $checkAll.prop('checked', flag);
 
                     var $element = $checkAll,
@@ -169,10 +168,24 @@ $(function () {
     }
 
     $('.js-all').on('click',function(){
+        $('#m2')[0].onzrchange({
+            checked: true,
+            checkedAll: true
+        })
+        // $('#m3')[0].onzrchange({
+        //     checked: true
+        // })
+        // $('#m4')[0].onzrchange({
+        //     checked: true
+        // })
+        // $('#m5')[0].onzrchange({
+        //     checked: true
+        // })
         // $('#m1')[0].onzrchange({
         //     checked: true
         // })
         // $('#m1').prop('checked', true);
+        // $('#m1').change();
     })
     $('.js-select').on('click', function () {
         //选中
