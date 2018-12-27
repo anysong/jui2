@@ -123,7 +123,6 @@ $(function () {
                     return
                 };
             }
-            alert(2);
             var $checkAll = $('input[name="' + _name + '"][data-all="true"]'),
                 $aCheckItems = $('input[name="' + _name + '"][data-all!="true"]');
 
