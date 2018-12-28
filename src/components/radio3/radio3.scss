@@ -82,8 +82,8 @@ input[type='checkbox'].disabled {
             left: 0;
             display: block;      /////FIXME !!!!!
             // display: inline-block;  /////FIXME !!!!!
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             border-width: 1px;
             border-style: solid;
             // border-radius: 100%;
@@ -95,8 +95,8 @@ input[type='checkbox'].disabled {
 
             &:after {
                 position: absolute;
-                width: 8px;
-                height: 8px;
+                width: 6px;
+                height: 6px;
                 left: 50%;
                 top: 50%;
                 display: table;

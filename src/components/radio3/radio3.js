@@ -83,8 +83,10 @@ $(function () {
                 if (name === 'label') {
                     if (opt[name].length == 0) {
                         $text.css('display', 'none');
+                        $input.removeAttr('data-label');
                     } else {
                         $text.css('display', 'inline').html(opt[name]);
+                        $input.attr('data-label', opt[name]);
                     }
                 };
             }
@@ -122,7 +124,7 @@ $(function () {
         $('#id1')[0].onzrchange({
             checked: true,
             disabled: true,
-            value: 'xx',
+            value: 'xx1',
             label: 14,
             beforeFn: function () {
                 // console.log(arguments);
