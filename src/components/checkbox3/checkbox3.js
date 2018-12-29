@@ -56,11 +56,12 @@ $(function () {
         addClickEvent($label, element); //label绑定事件
         addEvent(element) //绑定事件
     })
-    function addClickEvent($label, original){
+
+    function addClickEvent($label, original) {
         $label.on('click', function () {
-            setTimeout(function(){
+            setTimeout(function () {
                 original.onzrchange ? original.onzrchange() : '';
-            },30)
+            }, 30)
         })
     };
     //绑定自定义事件
@@ -70,8 +71,8 @@ $(function () {
                 input = this,
                 _name = $input.prop('name'),
                 _id = $input.prop('id'),
-                all = $input.attr('data-all');
-            
+                _all = $input.attr('data-all');
+
             var $label = $input.siblings('[for="' + _id + '"]'),
                 $clone = $label.children('.zr-checkbox-clone'),
                 $text = $clone.siblings('.zr-checkbox-label');
@@ -96,6 +97,7 @@ $(function () {
                 };
             }
             if (opt.beforeFn) opt.beforeFn.call(this, opt);
+            
             //选中
             if ($input.prop('checked')) {
                 $clone.addClass('zr-checkbox-checked');
@@ -113,75 +115,89 @@ $(function () {
                 $clone.removeClass('zr-checkbox-disabled');
                 $label.removeClass('zr-checkbox-wrapper-disabled');
             }
-            //全选
-            for (var name in opt) {
-                if (name === 'checkedAll') {
-                    var $checkboxAll = $('input[name="' + _name + '"]');
-                    $checkboxAll.each(function(i, element){
-                        var $element = $(element),
-                            _id = $element.prop('id'),
-                            _$label = $('label[for="' + _id + '"]'),
-                            _$clone = _$label.children('.zr-checkbox-clone');
-                        if (name) {
-                            _$clone.addClass('zr-checkbox-checked');
-                            _$label.addClass('zr-checkbox-wrapper-checked');
-                        } else {
-                            _$clone.removeClass('zr-checkbox-checked');
-                            _$label.removeClass('zr-checkbox-wrapper-checked');
-                        }
-                    })
-                    return
-                };
-            }
             var $checkAll = $('input[name="' + _name + '"][data-all="true"]'),
                 $aCheckItems = $('input[name="' + _name + '"][data-all!="true"]');
-
-            var checkedFn = function () {
-                if (all) {
-                    //全选
-                    $aCheckItems.prop('checked', $checkAll.prop('checked'));
-                    $aCheckItems.each(function (index, element) {
-                        var $element = $(element),
-                            _id = $element.prop('id'),
-                            _checked = $element.prop('checked'),
-                            _$label = $('label[for="' + _id + '"]'),
-                            _$clone = _$label.children('.zr-checkbox-clone');
-                        if (_checked) {
-                            _$clone.addClass('zr-checkbox-checked');
-                            _$label.addClass('zr-checkbox-wrapper-checked');
-                        } else {
-                            _$clone.removeClass('zr-checkbox-checked');
-                            _$label.removeClass('zr-checkbox-wrapper-checked');
-                        }
-                    })
+            
+            //根据当前input状态决定选中或非选中
+            var select = function (element) {
+                var $element = $(element),
+                    _id = $element.prop('id'),
+                    _checked = $element.prop('checked'),
+                    $label = $('label[for="' + _id + '"]'),
+                    $clone = $label.children('.zr-checkbox-clone');
+                if (_checked) {
+                    $clone.addClass('zr-checkbox-checked');
+                    $label.addClass('zr-checkbox-wrapper-checked');
                 } else {
-                    var flag = $aCheckItems.length === $aCheckItems.filter(':checked').length;
-                    $checkAll.prop('checked', flag);
-
-                    var $element = $checkAll,
-                        _id = $element.prop('id'),
-                        _checked = $element.prop('checked'),
-                        _$label = $('label[for="' + _id + '"]'),
-                        _$clone = _$label.children('.zr-checkbox-clone');
-                    if (_checked) {
-                        _$clone.addClass('zr-checkbox-checked');
-                        _$label.addClass('zr-checkbox-wrapper-checked');
-                    } else {
-                        _$clone.removeClass('zr-checkbox-checked');
-                        _$label.removeClass('zr-checkbox-wrapper-checked');
-                    }
+                    $clone.removeClass('zr-checkbox-checked');
+                    $label.removeClass('zr-checkbox-wrapper-checked');
                 }
             }
-            checkedFn();
+            //半选中
+            var midSelect = function (element) {
+                var $element = $(element),
+                    _id = $element.prop('id'),
+                    _checked = $element.prop('checked'),
+                    $label = $('label[for="' + _id + '"]'),
+                    $clone = $label.children('.zr-checkbox-clone');
+                if (_checked) {
+                    $clone.addClass('zr-checkbox-checked');
+                    $label.addClass('zr-checkbox-wrapper-checked');
+                } else {
+                    $clone.removeClass('zr-checkbox-checked');
+                    $label.removeClass('zr-checkbox-wrapper-checked');
+                }
+            }
+            //全选条件判断,判断完退出
+            for (var name in opt) {
+                if (name === 'checkedAll') {
+                    if(opt[name]){
+                        //全选
+                        $checkAll.prop('checked', true);
+                        $aCheckItems.prop('checked', true);
+                    }else {
+                        //全部选
+                        $checkAll.prop('checked', false);
+                        $aCheckItems.prop('checked', false);
+                    }
+                    select($checkAll[0]);
+                    $aCheckItems.each(function (index, element) {
+                        select(element);
+                    })
+                    return false;
+                }
+            }
+            //当前操作为全选
+            if (_all) {
+                $aCheckItems.prop('checked', $checkAll.prop('checked'));
+                $aCheckItems.each(function (index, element) {
+                    select(element);
+                })
+            } else {
+                var aCheckbox_len = $aCheckItems.length,
+                    checked_len = $aCheckItems.filter(':checked').length;
+
+                if (aCheckbox_len == checked_len) {
+                    //全选
+                    $checkAll.prop('checked', true);
+                    select($checkAll[0]);
+                } else if (checked_len > 0) {
+                    //半全选 时机并未选中
+                    midSelect($checkAll[0]);
+                } else {
+                    //全不选
+                    $checkAll.prop('checked', false);
+                    select($checkAll[0]);
+                }
+            }
 
             if (opt.afterFn) opt.afterFn.call(this);
         }
     }
 
-    $('.js-all').on('click',function(){
-        $('#m2')[0].onzrchange({
-            checked: true,
-            checkedAll: true
+    $('.js-all').on('click', function () {
+        $('#a1')[0].onzrchange({
+            checkedAll: ''
         })
     })
     $('.js-select').on('click', function () {
