@@ -44,6 +44,18 @@ input[type='checkbox'].disabled {
                 }
             }
         }
+        &.zr-checkbox-mid-checked {
+            .zr-checkbox-inner {
+                border-color: $zr-color;
+                background-color: $zr-color;
+                &:after {
+                    transform: rotate(90deg) scale(1);
+                    opacity: 1;
+                    transition: all .3s cubic-bezier(.78, .14, .15, .86);
+                    border-bottom: 0;
+                }
+            }
+        }
         &.zr-checkbox-disabled {
             .zr-checkbox-inner {
                 border-color: #d9d9d9 !important;
