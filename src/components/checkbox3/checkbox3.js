@@ -215,6 +215,7 @@ $(function () {
             checked: true,
             disabled: true,
             value: 'xx',
+            label: 'xx1',
             beforeFn: function () {
                 console.log(this);
             },
