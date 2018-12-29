@@ -6,6 +6,7 @@ var config = {
         'radio3',
         'checkbox',
         'checkbox2',
+        'checkbox3',
         'dropdown'
     ]
 };

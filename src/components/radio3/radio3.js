@@ -68,12 +68,14 @@ $(function () {
     function addEvent(dom) {
         dom.onzrchange = function (option) {
             var $input = $(this),
-                _id = $input.prop('id'),
+                original = this,
                 $label = $input.siblings('[for="' + _id + '"]'),
                 $clone = $label.children('.zr-radio-clone'),
-                $text = $clone.siblings('.zr-radio-label'),
-                original = this,
-                inputName = $input.prop('name');
+                $text = $clone.siblings('.zr-radio-label');
+                
+            var inputName = $input.prop('name'),
+                _id = $input.prop('id');
+
             var opt = option || {};
 
             for (var name in opt) {
