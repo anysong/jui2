@@ -68,13 +68,13 @@ $(function () {
         dom.onzrchange = function (option) {
             var $input = $(this),
                 input = this,
-                $label = $input.siblings('[for="' + _id + '"]'),
-                $clone = $label.children('.zr-checkbox-clone'),
-                $text = $clone.siblings('.zr-checkbox-label');
-
-            var _name = $input.prop('name'),
+                _name = $input.prop('name'),
                 _id = $input.prop('id'),
                 all = $input.attr('data-all');
+            
+            var $label = $input.siblings('[for="' + _id + '"]'),
+                $clone = $label.children('.zr-checkbox-clone'),
+                $text = $clone.siblings('.zr-checkbox-label');
 
             var config = {
                 checkedall: false
