@@ -25,6 +25,12 @@ input[type='checkbox'].disabled {
     &.zr-radio-wrapper-checked {
 
     }
+    &.zr-radio-wrapper-disabled {
+        .zr-radio-label {
+            color: rgba(0,0,0,0.25);
+            cursor: not-allowed;
+        }
+    }
     &:hover {
         .zr-radio-clone {
             .zr-radio-inner {
