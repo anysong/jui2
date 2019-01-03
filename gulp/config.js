@@ -7,7 +7,8 @@ var config = {
         'checkbox',
         'checkbox2',
         'checkbox3',
-        'dropdown'
+        'dropdown',
+        'upload'
     ]
 };
 
