@@ -78,7 +78,6 @@ $(function () {
     //绑定自定义事件
     function addEvent(dom) {
         dom.onzrchange = function (option) {
-            console.log(11)
             var $input = $(this),
                 _id = $input.prop('id');
 
@@ -122,5 +121,16 @@ $(function () {
     });
     $(document).on("DOMNodeRemoved", function () {
         // console.log('rm');
+    })
+
+    $('.js-detail').on('click',function(){
+        console.log('id1')
+        console.log($('#id1')[0].files);
+        var obj = $('#id1')[0];
+        // for(var name in obj){
+        //     console.log(name);
+        // }
+        var cc = $.extend({}, obj)
+        console.log(cc);
     })
 })
