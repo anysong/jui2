@@ -1,133 +1,146 @@
 $zr-color: #4363f4;
-input[type='file'].disabled {
+
+input[type='upload'][disabled] {
     cursor: not-allowed
 }
-
+body {
+    font-family: 'Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif';
+}
 .zr-upload-wrapper {
-    position: relative;
-    display: inline-block;
-    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
-    font-size: 14px;
-    // font-variant: tabular-nums;
-    line-height: 1.5;  //1.5
-    color: rgba(0,0,0,0.65);
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    white-space: nowrap;
-    outline: none;
-    margin-right: 8px;
-    cursor: pointer;
-    &.zr-upload-wrapper-checked {
-
-    }
-    &.zr-upload-wrapper-disabled {
-        .zr-upload-label {
-            color: rgba(0,0,0,0.25);
-            cursor: not-allowed;
+    &.zr-upload-wrapper-disabled {}
+    //拖拽样式
+    &.zr-upload-wrapper-drag {
+        .zr-upload-clone {
+            &:hover {
+                color:rgba(0, 0, 0, .65);
+                .zr-upload-tips {
+                    color: rgba(0, 0, 0, .35);
+                }
+            }
+            border: 1px dashed #d9d9d9;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            .zr-upload-icon {
+                display: block;
+                margin: 0 auto;
+                width: 30px;
+                height: 30px;
+                border-bottom: 2px solid rgba(0,0,0,.25);
+                margin-bottom: 20px;
+                margin-top: 40px;
+                &:after {
+                    content: '';
+                    opacity: 1;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    width: 30px;
+                    height: 30px;
+                    border-left: 2px solid rgba(0,0,0,.25);
+                }
+            }
+            .zr-upload-label {
+                margin-top: 20px;
+            }
+            .zr-upload-text {
+                margin: 0;
+                font-weight: bold;
+                text-align: center;
+                white-space: initial;
+                line-height: 20px;
+                color: rgba(0, 0, 0, .85);
+            }
+            .zr-upload-tips {
+                margin: 0;
+                text-align: center;
+                white-space: initial;
+                line-height: 20px;
+                color: rgba(0, 0, 0, .35);
+            }
         }
     }
-    &:hover {
+    //图片样式
+    &.zr-upload-wrapper-picture {
         .zr-upload-clone {
-            .zr-upload-inner {
-                border-color: $zr-color;
+            border: 1px dashed #d9d9d9;
+            width: 90px;
+            height: 90px;
+            background-color: #f5f5f5;
+            .zr-upload-icon {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 30px;
+                height: 30px;
+                margin-left: -15px;
+                margin-top: -30px;
+                border-bottom: 2px solid rgba(0,0,0,.25);
+                &:after {
+                    content: '';
+                    opacity: 1;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    width: 30px;
+                    height: 30px;
+                    border-left: 2px solid rgba(0,0,0,.25);
+                }
             }
         }
     }
     .zr-upload-clone {
-        &.zr-upload-checked {
-            .zr-upload-inner {
-                border-color: $zr-color;
-                &:after {
-                    // transform: scale(1);
-                    transform: translate(-50%,-50%) scale(1);
-                    opacity: 1;
-                    transition: all .3s cubic-bezier(.78, .14, .15, .86);
-                }
-            }
-        }
         &.zr-upload-disabled {
-            .zr-upload-inner {
-                border-color: #d9d9d9 !important;
-                background-color: #f5f5f5;
+            border-color: #d9d9d9 !important;
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            .zr-upload-label {
+                color: rgba(0, 0, 0, 0.25);
                 cursor: not-allowed;
-                &:after {
-                    background-color: #ccc;
-                }
+            }
+            .zr-upload-icon {
+                color: rgba(0, 0, 0, 0.25);
+                cursor: not-allowed;
             }
         }
         &:hover {
-            .zr-upload-inner {
-                border-color: $zr-color;
-            }
+            color: $zr-color;
+            border-color: $zr-color;
         }
-        position: relative;
-        display: inline-block;
-        font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
-        font-size: 14px;
-        // font-variant: tabular-nums;
-        line-height: 1;  //1.5
-        color: rgba(0,0,0,0.65);
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        white-space: nowrap;
-        outline: none;
-        vertical-align: sub; //sub
+        display: inline-block;
+        height: 32px;
+        padding: 0 15px;
+        border: 1px solid #d9d9d9;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        line-height: 30px;
+        font-weight: 400;
         cursor: pointer;
-        // 代糖
-        .zr-upload-inner {
-            position: relative;
-            box-sizing: border-box; //ant-no
-            top: 0;
-            left: 0;
-            display: block;      /////FIXME !!!!!
-            // display: inline-block;  /////FIXME !!!!!
-            width: 14px;
-            height: 14px;
-            border-width: 1px;
-            border-style: solid;
-            border-color: #d9d9d9;
-            background-color: #fff;
-            transition: all .3s;
+        position: relative;
+        text-align: center;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        background-image: none;
+        white-space: nowrap;
+        font-size: 14px;
+        transition: all .3s ease-in;
+        border-color: #d9d9d9;
+        background-color: #fff;
+        color: rgba(0, 0, 0, .65);
+        outline: none;
 
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+        .zr-upload-icon {
+            display: inline-block;
+            position: relative;
             &:after {
-                position: absolute;
-                width: 6px;
-                height: 6px;
-                left: 50%;
-                top: 50%;
-                display: table;
-                border-radius: 100%;
-                border-radius: 8px;
-                background-color: $zr-color;
-                content: ' '; 
-                transform: translate(-50%,-50%) scale(0);
-                transition: all .3s ease-in;
-                opacity: 0;
-                border-top: 0; 
-                border-left: 0; 
+                font-family: 'fontello';
+                content: '@';
+                opacity: 1;
             }
         }
-        // 源生
-        .zr-upload-original {
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1; //1
-            outline: none;
-            margin: 0;
-            cursor: pointer;
-        }
-    }
-    .zr-upload-label {
-        font-size: 14px;
-        padding-left: 8px;
-        padding-right: 8px;
+
+        .zr-upload-label {}
     }
 }

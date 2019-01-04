@@ -15,15 +15,16 @@
 <body>
     <div>upload</div>
 
-    <input type="file" class="zr-upload" name="aa">
+    <input type="file" class="zr-upload" name="aa" data-label="上传">
+    <input type="file" class="zr-upload" name="bb" data-label="上传" disabled>
+    <input type="file" class="zr-upload zr-upload-picture" name="aa" data-label="picture">
+
+    <div style="width:400px;height:200px;">
+        <input type="file" class="zr-upload zr-upload-drag" name="aa" data-tips="Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files" data-text="Click or drag file to this area to upload">
+    </div>
+    
 
 
-    <label class="zr-upload-wrapper" for="">
-        <button class="zr-upload-btn">
-            <i class="">@</i>
-            <span>upload</span>
-        </button>
-    </label>
 </body>
 
 </html>
