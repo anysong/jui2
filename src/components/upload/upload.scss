@@ -40,9 +40,6 @@ body {
                     border-left: 2px solid rgba(0,0,0,.25);
                 }
             }
-            .zr-upload-label {
-                margin-top: 20px;
-            }
             .zr-upload-text {
                 margin: 0;
                 font-weight: bold;
@@ -94,7 +91,7 @@ body {
             border-color: #d9d9d9 !important;
             background-color: #f5f5f5;
             cursor: not-allowed;
-            .zr-upload-label {
+            .zr-upload-text {
                 color: rgba(0, 0, 0, 0.25);
                 cursor: not-allowed;
             }
@@ -140,7 +137,5 @@ body {
                 opacity: 1;
             }
         }
-
-        .zr-upload-label {}
     }
 }

@@ -26,38 +26,39 @@ $(function () {
             checkOnly();
             $original.prop('id', _id);
         }
-        var html = '<label class="zr-upload-wrapper" for="' + _id + '">' +
+        var NORMAL = '<label class="zr-upload-wrapper" for="' + _id + '">' +
             '<span class="zr-upload-clone">' +
             '<i class="zr-upload-icon"></i>' +
-            '<span class="zr-upload-label">' + _text + '</span>' +
+            '<span class="zr-upload-text">' + _text + '</span>' +
             '</span>' +
             '</label>';
+
+        var PICTURE = '<label class="zr-upload-wrapper zr-upload-wrapper-picture" for="' + _id + '">' +
+            '<span class="zr-upload-clone">' +
+            '<i class="zr-upload-icon"></i>' +
+            '</label>';
+
+        var DRAG = '<label class="zr-upload-wrapper zr-upload-wrapper-drag" for="' + _id + '">' +
+            '<span class="zr-upload-clone">' +
+            '<i class="zr-upload-icon"></i>' +
+            '<p class="zr-upload-text">' + _text + '</p>' +
+            '<p class="zr-upload-tips">' + _tips + '</p>' +
+            '</span>' +
+            '</label>';
+        var html = '';
+        if (_picFlag) {
+            html = PICTURE;
+        } else if (_dragFlag) {
+            html = DRAG;
+        } else {
+            html = NORMAL;
+        }
         var $label = $(html);
         $original.after($label);
         $original.css('display', 'none');
 
-        var $clone = $label.children('.zr-upload-clone'),
-            $text = $clone.children('.zr-upload-label');
+        var $clone = $label.children('.zr-upload-clone');
 
-        //图片格式
-        if (_picFlag) {
-            $label.addClass('zr-upload-wrapper-picture');
-        }
-        //拖拽样式
-        if (_dragFlag) {
-            $label.addClass('zr-upload-wrapper-drag');
-            var draginner = '<i class="zr-upload-icon"></i>' +
-                '<p class="zr-upload-text">' + _text + '</p>' +
-                '<p class="zr-upload-tips">' + _tips + '</p>';
-            $clone.html(draginner);
-        }
-
-        if (_picFlag || _text.length == 0) {
-            $text.css('display', 'none');
-        } else {
-            $text.css('display', 'inline');
-        }
-        //已禁用
         if (_disabled) {
             $clone.addClass('zr-upload-disabled');
             $label.addClass('zr-upload-wrapper-disabled');
@@ -83,20 +84,20 @@ $(function () {
 
             var $label = $input.siblings('[for="' + _id + '"]'),
                 $clone = $label.children('.zr-upload-clone'),
-                $text = $clone.siblings('.zr-upload-label');
+                $text = $clone.siblings('.zr-upload-text');
 
             var opt = option || {};
 
             for (var name in opt) {
                 if (name === 'disabled') $input.prop('disabled', opt[name]);
                 if (name === 'value') $input.prop('value', opt[name]);
-                if (name === 'label') {
+                if (name === 'text') {
                     if (opt[name].length == 0) {
                         $text.css('display', 'none');
-                        $input.removeAttr('data-label');
+                        $input.removeAttr('data-text');
                     } else {
                         $text.css('display', 'inline').html(opt[name]);
-                        $input.attr('data-label', opt[name]);
+                        $input.attr('data-text', opt[name]);
                     }
                 };
             }
