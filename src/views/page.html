@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page</title>
+    <script src="/plugins/jquery3.3.1.js"></script>
+    <script src="/dest/components/page/page.js"></script>
+    <link rel="stylesheet" href="/dest/components/base/base.css">
+    <link rel="stylesheet" href="/dest/components/page/page.css">
+</head>
+
+<body>
+    <h4>page</h4>
+    <div class="zr-pagination" id="page1"></div>
+    <div class="zr-pagination" id="page2"></div>
+
+    <script>
+        
+        $(function(){
+            $('#page1')[0].onzrinit({
+                'total': 20
+            })     
+            $('#page2')[0].onzrinit({
+                'total': NaN
+            })       
+        })
+    </script>
+</body>
+</html>

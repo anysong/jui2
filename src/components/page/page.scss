@@ -1,0 +1,52 @@
+$zr-color: #4363f4;
+
+.zr-pagination {
+    .zr-pagination-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        // font-size: 0;
+        line-height: 1.5;
+        color: rgba(0, 0, 0, 0.65);
+        box-sizing: border-box;
+
+        .zr-pagination-item {
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            user-select: none;
+            min-width: 32px;
+            height: 32px;
+            line-height: 30px;
+            text-align: center;
+            list-style: none;
+            display: inline-block;
+            vertical-align: middle;
+            border: 1px solid #d9d9d9;
+            background-color: #fff;
+            margin-right: 8px;
+            outline: 0;
+            box-sizing: border-box;
+            a {
+                text-decoration: none;
+                color: rgba(0, 0, 0, 0.65);
+                transition: none;
+                margin: 0 6px;
+            }
+            &.active {
+                border-color: $zr-color;
+                font-weight: 500;
+                a {
+                    color: $zr-color;
+                }
+            }
+        }
+        &::after {
+            content: '';
+            height: 0;
+            visibility: hidden;
+            clear: both;
+            display: block;
+        }
+    }
+}
