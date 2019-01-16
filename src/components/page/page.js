@@ -77,7 +77,9 @@ $(function () {
             }
             var bindListener = function () {
                 $list.on('click', '.zr-pagination-item', function () {
-                    var text = $(this).children('a').text();
+                    var $li = $(this),
+                        text = $li.children('a').text();
+
                     if (text === 'Home') {
                         _currentPage = 1;
                     } else if (text === 'Next') {
@@ -85,7 +87,7 @@ $(function () {
                     } else {
                         _currentPage = parseInt(text)
                     }
-                    countPageBar();
+                    countPageBar(); //计算分页;
                     opt.onChange(_currentPage); //执行回调
                 });
             }
