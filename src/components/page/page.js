@@ -14,6 +14,7 @@ $(function () {
     function addEvent(dom) {
         dom.onzrinit = function (option) {
             var $element = $(this),
+                $list = $element.children('ul'),
                 element = this;
             console.log(element);
             var opt = $.extend({
@@ -31,14 +32,63 @@ $(function () {
             //有条数再做操作
             if (typeof opt.total === 'number' && !isNaN(opt.total) && opt.total > 0) {
                 console.log(opt.total);
-                var total = opt.total;
-
-                var init = function(){
-
-                };
-            }else {
+            } else {
                 //请传入分页条数
+                return;
             }
+            console.log('go on');
+            var _total = opt.total,
+                _currentPage = opt.current,
+                _pageSize = opt.pageSize,
+                _page = Math.ceil(_total / _pageSize),
+                _pageList = [];
+
+            console.log('_page', _page);
+            //计算
+            var countPageBar = function () {
+                _pageList = [];
+                if (_page < 7) {
+                    for (var i = 0; i < _page; i++) {
+                        _pageList.push(i + 1);
+                    }
+                } else {
+                    if (_currentPage < 5) {
+                        _pageList = [1, 2, 3, 4, 5, '...', _page];
+                    } else if (_currentPage < _page - 6) {
+                        _pageList = [1, '...', (_page / 2) - 1, Math.ceil(_page / 2), (_page / 2) + 1, '...', _page];
+                    } else {
+                        _pageList = [1, '...', _page - 4, _page - 3, _page - 2, _page - 1, _page];
+                    }
+
+                }
+                console.log(_pageList);
+            }
+            var renderPageBar = function () {
+
+            };
+            var parseDOM = function () {
+
+            }
+            var bindListener = function () {
+                $list.on('click', '.zr-pagination-item', function () {
+                    var text = $(this).children('a').text();
+                    if (text === 'Home') {
+                        _currentPage = 1;
+                    } else if (text === 'Next') {
+                        _currentPage += 1;
+                    } else {
+                        _currentPage = parseInt(text)
+                    }
+                    countPageBar();
+                    opt.onChange(_currentPage); //执行回调
+                });
+            }
+            var init = function () {
+                countPageBar();
+                parseDOM();
+                bindListener();
+            };
+            init();
         }
     }
 })

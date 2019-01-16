@@ -21,7 +21,10 @@
         
         $(function(){
             $('#page1')[0].onzrinit({
-                'total': 20
+                'total': 200,
+                'pageSize': 5,
+                'onChange': function(current){
+                }
             })     
             $('#page2')[0].onzrinit({
                 'total': NaN
