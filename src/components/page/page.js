@@ -62,9 +62,15 @@ $(function () {
 
                 }
                 console.log(_pageList);
+                renderPageBar();
             }
             var renderPageBar = function () {
-
+                var html = '<ul class="zr-pagination-list"><li class="zr-pagination-item"><a href="javascript:;">Home</a></li>';
+                for(var i=0; i<_pageList.length;i++){
+                    html += '<li class="zr-pagination-item"><a href="javascript:;">' + _pageList[i] + '</a></li>'
+                }
+                html += '<li class="zr-pagination-item"><a href="javascript:;">Next</a></li></ul>';
+                $list.html(html);
             };
             var parseDOM = function () {
 
