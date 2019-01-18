@@ -16,7 +16,7 @@ $(function () {
             var $element = $(this),
                 $list = $element.children('ul'),
                 element = this;
-            
+
             var opt = $.extend({
                 'current': 1, //当前页数
                 'pageSize': 10, //每页条数
@@ -24,11 +24,21 @@ $(function () {
                 'defaultCurrent': 1, //默认的当前页数
                 'defaultPageSize': 15, //默认的每页条数
                 'pageSizeOptions': [], //[10,20,30,40]
-                'showSizeChanger': false, //是否显示每页展示条数菜单
-                'showTotal': false, //是否显示总数
+                'showPageSize': false, //是否显示分页切换
+                'showTotal': false, //是否显示总条数
+                'showTotalPage': false, //是否显示总页数
+                'showInfo': false, //是否显示分页信息
+                'showJump': false, //是否显示跳转框
                 'onChange': function () {}, //分页点击
                 'onShowSizeChange': function () {} //每页下拉回调
-            }, option)
+            }, option);
+            // 可选模块
+            var $pageSize_plugin,
+                $total_plugin,
+                $totalPage_plugin,
+                $info_plugin,
+                $jump_plugin;
+
             //有条数再做操作
             if (typeof opt.total === 'number' && !isNaN(opt.total) && opt.total > 0) {
                 console.log('总条数=> ', opt.total);
@@ -65,17 +75,21 @@ $(function () {
                 renderPageBar();
             }
             var renderPageBar = function () {
-                var html = '<ul class="zr-pagination-list"><li class="zr-pagination-item"><a href="javascript:;">Home</a></li>';
-                for(var i=0; i<_pageList.length;i++){
-                    if(_currentPage == _pageList[i]){
+                var html = '<ul class="zr-pagination-list">';
+                html += '<li class="zr-pagination-item"><a href="javascript:;">Home</a></li>';
+                for (var i = 0; i < _pageList.length; i++) {
+                    if (_currentPage == _pageList[i]) {
                         console.log(_currentPage);
                         console.log(typeof _currentPage);
                         html += '<li class="zr-pagination-item active"><a href="javascript:;">' + _pageList[i] + '</a></li>'
-                    }else {
+                    } else {
                         html += '<li class="zr-pagination-item"><a href="javascript:;">' + _pageList[i] + '</a></li>'
                     }
                 }
-                html += '<li class="zr-pagination-item"><a href="javascript:;">Next</a></li></ul>';
+                html += '<li class="zr-pagination-item"><a href="javascript:;">Next</a></li>';
+                html += $totalPage_plugin;
+                html += $total_plugin;
+                html += '</ul>';
                 $list.html(html);
             };
             var parseDOM = function () {
@@ -97,10 +111,35 @@ $(function () {
                     opt.onChange(_currentPage); //执行回调
                 });
             }
+            var initPlugins = function () {
+                // $pageSize_plugin,
+                // $totalPage_plugin,
+                // $info_plugin,
+                // $jump_plugin;
+                
+                $total_plugin = '<li class="zr-pagination-options">'+
+                '<div class="zr-pagination-options-jump">跳转'+
+                '<input type="text">页'+
+                '</div>'+
+                '</li>';
+
+                $totalPage_plugin = '<li class="zr-pagination-options">'+
+                '<div class="zr-pagination-options-jump">共'+ _page + '页</div>'+
+                '</li>';
+
+            }
+            //是否显示总条数
+            //是否显示分页信息
+            //是否显示总页数
+            //是否显示跳转框
+            //是否显示分页切换
+
+
             var init = function () {
-                countPageBar();
                 parseDOM();
                 bindListener();
+                initPlugins();
+                countPageBar();
             };
             init();
         }
