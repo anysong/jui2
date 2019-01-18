@@ -16,7 +16,7 @@ $(function () {
             var $element = $(this),
                 $list = $element.children('ul'),
                 element = this;
-            console.log(element);
+            
             var opt = $.extend({
                 'current': 1, //当前页数
                 'pageSize': 10, //每页条数
@@ -31,19 +31,19 @@ $(function () {
             }, option)
             //有条数再做操作
             if (typeof opt.total === 'number' && !isNaN(opt.total) && opt.total > 0) {
-                console.log(opt.total);
+                console.log('总条数=> ', opt.total);
             } else {
                 //请传入分页条数
                 return;
             }
-            console.log('go on');
             var _total = opt.total,
                 _currentPage = opt.current,
                 _pageSize = opt.pageSize,
                 _page = Math.ceil(_total / _pageSize),
                 _pageList = [];
 
-            console.log('_page', _page);
+            console.log('总页数=> ', _page);
+            console.log('每页条数=> ', _pageSize);
             //计算
             var countPageBar = function () {
                 _pageList = [];
@@ -67,7 +67,13 @@ $(function () {
             var renderPageBar = function () {
                 var html = '<ul class="zr-pagination-list"><li class="zr-pagination-item"><a href="javascript:;">Home</a></li>';
                 for(var i=0; i<_pageList.length;i++){
-                    html += '<li class="zr-pagination-item"><a href="javascript:;">' + _pageList[i] + '</a></li>'
+                    if(_currentPage == _pageList[i]){
+                        console.log(_currentPage);
+                        console.log(typeof _currentPage);
+                        html += '<li class="zr-pagination-item active"><a href="javascript:;">' + _pageList[i] + '</a></li>'
+                    }else {
+                        html += '<li class="zr-pagination-item"><a href="javascript:;">' + _pageList[i] + '</a></li>'
+                    }
                 }
                 html += '<li class="zr-pagination-item"><a href="javascript:;">Next</a></li></ul>';
                 $list.html(html);
@@ -78,14 +84,14 @@ $(function () {
             var bindListener = function () {
                 $list.on('click', '.zr-pagination-item', function () {
                     var $li = $(this),
-                        text = $li.children('a').text();
+                        pageNo = $li.children('a').text();
 
-                    if (text === 'Home') {
+                    if (pageNo === 'Home') {
                         _currentPage = 1;
-                    } else if (text === 'Next') {
+                    } else if (pageNo === 'Next') {
                         _currentPage += 1;
                     } else {
-                        _currentPage = parseInt(text)
+                        _currentPage = parseInt(pageNo)
                     }
                     countPageBar(); //计算分页;
                     opt.onChange(_currentPage); //执行回调
