@@ -41,6 +41,20 @@ $zr-color: #4363f4;
                 }
             }
         }
+        .zr-pagination-total-text {
+            display: inline-block;
+            vertical-align: middle;
+            height: 32px;
+            line-height: 30px;
+            margin-right: 8px;
+        }
+        .zr-pagination-total-page {
+            display: inline-block;
+            vertical-align: middle;
+            height: 32px;
+            line-height: 30px;
+            margin-left: 8px;
+        }
         .zr-pagination-options {
             display: inline-block;
             vertical-align: middle;
