@@ -181,11 +181,10 @@ $zr-color: #4363f4;
             margin-right: 8px;
             outline: 0;
             box-sizing: border-box;
-
+            transition: all .3s;
             a {
                 text-decoration: none;
                 color: rgba(0, 0, 0, 0.65);
-                transition: none;
                 margin: 0 6px;
                 font-weight: 500;
             }

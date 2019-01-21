@@ -3,9 +3,9 @@ $(function () {
     $('.zr-pagination').each(function (index, element) {
         var $original = $(element);
         var html = '<ul class="zr-pagination-list">' +
-            '<li class="zr-pagination-item"><a href="javascript:;">Home</a></li>' +
+            '<li class="zr-pagination-pre"><a href="javascript:;"></a></li>' +
             '<li class="zr-pagination-item active"><a href="javascript:;">1</a></li>' +
-            '<li class="zr-pagination-item"><a href="javascript:;">Next</a></li>' +
+            '<li class="zr-pagination-next"><a href="javascript:;"></a></li>' +
             '</ul>';
         $original.html(html);
         addEvent(element);
