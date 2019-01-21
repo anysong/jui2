@@ -224,6 +224,8 @@ $(function () {
                 for (var i = 0; i < _pageList.length; i++) {
                     if (_currentPage == _pageList[i]) {
                         BAR += '<li class="zr-pagination-item active"><a href="javascript:;">' + _pageList[i] + '</a></li>'
+                    }else if(_pageList[i] === '...'){
+                        BAR += '<li class="zr-pagination-more"><a href="javascript:;">' + _pageList[i] + '</a></li>'
                     } else {
                         BAR += '<li class="zr-pagination-item"><a href="javascript:;">' + _pageList[i] + '</a></li>'
                     }
