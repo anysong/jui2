@@ -30,7 +30,8 @@ $(function () {
                 'showInfo': false, //是否显示分页信息
                 'showJump': false, //是否显示跳转框
                 'onChange': function () {}, //分页点击
-                'onShowSizeChange': function () {} //每页下拉回调
+                'onShowSizeChange': function () {}, //每页下拉回调
+                'errNotice': '输入有误,请检查后重新尝试'
             }, option);
             // 可选模块
             var BAR,
@@ -176,7 +177,10 @@ $(function () {
                     reloadBar(); //计算分页;
                     opt.onChange(_currentPage); //执行回调
                 });
-                
+                $element.on('input', '.zr-pagination-options-jump input', function(ev){
+                    var value = ev.target.value;
+                    $(this).val(value.replace(/[^\d]/g,''));
+                })
                 $element.on('keyup', '.zr-pagination-options-jump input', function(ev){
                     if(ev.keyCode == 13){
                         var pageNo = parseInt(ev.target.value); 
@@ -187,6 +191,7 @@ $(function () {
                             reloadBar();
                         }else {
                             //输入有误
+                            alert(opt.errNotice);
                         }
                     }
                 })
