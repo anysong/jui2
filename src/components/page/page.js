@@ -22,8 +22,8 @@ $(function () {
                 'pageSize': 10, //每页条数
                 'total': 0, //总数
                 'defaultCurrent': 1, //默认的当前页数
-                'defaultPageSize': 15, //默认的每页条数
-                'pageSizeOptions': [50, 100], //[10,20,30,40]
+                'defaultPageSize': 20, //默认的每页条数
+                'pageSizeOptions': [20, 50, 100], //[10,20,30,40]
                 'showPageSize': false, //是否显示分页切换
                 'showTotal': false, //是否显示总条数
                 'showTotalPage': false, //是否显示总页数
@@ -33,7 +33,8 @@ $(function () {
                 'onShowSizeChange': function () {} //每页下拉回调
             }, option);
             // 可选模块
-            var SIZE_M,
+            var BAR,
+                SIZE_M,
                 TOTAL_M,
                 PAGE_M,
                 INFO_M,
@@ -50,54 +51,11 @@ $(function () {
             }
             var _total = opt.total,
                 _currentPage = opt.current,
-                _pageSize = opt.pageSize,
+                _pageSize = opt.pageSize || opt.defaultPageSize,
                 _page = Math.ceil(_total / _pageSize),
                 _pageList = [];
 
-            //计算
-            var countPageBar = function () {
-                initModule(); //初始化模版
-                _pageList = [];
-                if (_page < 7) {
-                    for (var i = 0; i < _page; i++) {
-                        _pageList.push(i + 1);
-                    }
-                } else {
-                    if (_currentPage < 5) {
-                        _pageList = [1, 2, 3, 4, 5, '...', _page];
-                    } else if (_currentPage < _page - 6) {
-                        _pageList = [1, '...', (_page / 2) - 1, Math.ceil(_page / 2), (_page / 2) + 1, '...', _page];
-                    } else {
-                        _pageList = [1, '...', _page - 4, _page - 3, _page - 2, _page - 1, _page];
-                    }
-
-                }
-                renderPageBar(); //渲染
-            }
-            var renderPageBar = function () {
-                var html = '<ul class="zr-pagination-list">';
-                html += TOTAL_M;
-                html += PRE_M;
-                for (var i = 0; i < _pageList.length; i++) {
-                    if (_currentPage == _pageList[i]) {
-                        console.log(_currentPage);
-                        console.log(typeof _currentPage);
-                        html += '<li class="zr-pagination-item active"><a href="javascript:;">' + _pageList[i] + '</a></li>'
-                    } else {
-                        html += '<li class="zr-pagination-item"><a href="javascript:;">' + _pageList[i] + '</a></li>'
-                    }
-                }
-                html += NEXT_M;
-                html += PAGE_M;
-                html += SIZE_M;
-                html += JUMP_M;
-                html += '</ul>';
-                $list.html(html);
-                initDropdown(); //初始化下拉模块
-            };
-            var parseDOM = function () {
-
-            };
+           
             var initDropdown = function () {
                 //初始化下拉组件
                 $element.find('.zr-dropdown').each(function (index, element) {
@@ -130,9 +88,9 @@ $(function () {
                         _currentPage = 1,
                         _pageSize = num,
                         _page = Math.ceil(_total / _pageSize);
-                        countPageBar();
+                        reloadBar();
                         //执行回调
-                        opt.onShowSizeChange.call(this, 50);
+                        opt.onShowSizeChange.call(this, _pageSize);
                     })
 
                     //自定义属性
@@ -215,10 +173,55 @@ $(function () {
                     } else {
                         _currentPage = parseInt(pageNo)
                     }
-                    countPageBar(); //计算分页;
+                    reloadBar(); //计算分页;
                     opt.onChange(_currentPage); //执行回调
                 });
-            }
+                
+                $element.on('keyup', '.zr-pagination-options-jump input', function(ev){
+                    if(ev.keyCode == 13){
+                        var pageNo = parseInt(ev.target.value); 
+                        console.log(pageNo);
+                        if(!isNaN(pageNo) && pageNo >0 && pageNo < _page+1){
+                            //执行跳转
+                            _currentPage = pageNo;
+                            reloadBar();
+                        }else {
+                            //输入有误
+                        }
+                    }
+                })
+            };
+
+            // new
+            var countBar = function(){
+                _pageList = [];
+                if (_page < 7) {
+                    for (var i = 0; i < _page; i++) {
+                        _pageList.push(i + 1);
+                    }
+                } else {
+                    if (_currentPage < 5) {
+                        _pageList = [1, 2, 3, 4, 5, '...', _page];
+                    } else if (_currentPage < _page - 6) {
+                        _pageList = [1, '...', (_page / 2) - 1, Math.ceil(_page / 2), (_page / 2) + 1, '...', _page];
+                    } else {
+                        _pageList = [1, '...', _page - 4, _page - 3, _page - 2, _page - 1, _page];
+                    }
+
+                }
+            };
+            //初始化分页
+            var initBar = function(){
+                BAR = '';
+                for (var i = 0; i < _pageList.length; i++) {
+                    if (_currentPage == _pageList[i]) {
+                        BAR += '<li class="zr-pagination-item active"><a href="javascript:;">' + _pageList[i] + '</a></li>'
+                    } else {
+                        BAR += '<li class="zr-pagination-item"><a href="javascript:;">' + _pageList[i] + '</a></li>'
+                    }
+                }
+            };
+            //初始化各个模块
             var initModule = function () {
                 //上一页
                 PRE_M = '<li class="zr-pagination-item"><a href="javascript:;">Pre</a></li>';
@@ -227,16 +230,24 @@ $(function () {
                 //跳转
                 JUMP_M = '<li class="zr-pagination-options">' +
                     '<div class="zr-pagination-options-jump">跳转' +
-                    '<input type="text">页' +
+                    '<input type="text" value="' + _currentPage + '">页' +
                     '</div>' +
                     '</li>';
                 //总页数
                 PAGE_M = '<li class="zr-pagination-total-page">共' + _page + '页</li>';
                 //总条数
                 TOTAL_M = '<li class="zr-pagination-total-text">共' + _total + '条</li>';
+                //信息
+                INFO_M = '';
+                //分页下拉
+                initSize();
+            }
+            //初始化分页下拉
+            var initSize = function (){
                 //每页条数
                 SIZE_M = '<div class="zr-dropdown zr-dropdown-btn" data-type="click">' +
-                    '<a class="zr-dropdown-link" href="javascript:;">50/页<i class="zr-icon-angle zr-icon-down"></i></a>' +
+                    '<a class="zr-dropdown-link" href="javascript:;">'+
+                    _pageSize + '/页<i class="zr-icon-angle zr-icon-down"></i></a>' +
                     '<div class="zr-dropdown-menu">';
                 var html_li = '';
                 opt.pageSizeOptions.map(function (item) {
@@ -244,21 +255,42 @@ $(function () {
                 })
                 SIZE_M += html_li;
                 SIZE_M += '</div></div>';
-
-                //信息
-                INFO_M = '';
-            }
-            //是否显示总条数
-            //是否显示分页信息
-            //是否显示总页数
-            //是否显示跳转框
-            //是否显示分页切换
-
-
+            };
+            //渲染
+            var render = function (){
+                var html = '<ul class="zr-pagination-list">';
+                if(opt.showTotal){
+                    html += TOTAL_M;
+                }
+                html += PRE_M;
+                html += BAR;
+                html += NEXT_M;
+                if(opt.showTotalPage){
+                    html += PAGE_M;
+                }
+                if(opt.showPageSize){
+                    html += SIZE_M;
+                }
+                if(opt.showJump){
+                    html += JUMP_M;
+                }
+                html += '</ul>';
+                //渲染
+                $list.html(html);
+                initDropdown(); //初始化下拉模块
+            };
+            var reloadBar = function(){
+                countBar();
+                initModule();
+                initBar();
+                render();
+            };
             var init = function () {
-                parseDOM();
                 bindListener();
-                countPageBar();
+                countBar();
+                initModule(); //初始化各部分模块(除页码)
+                initBar(); //初始化分页条
+                render(); //组装渲染;
             };
             init();
         }
