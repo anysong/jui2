@@ -23,7 +23,7 @@ $(function () {
                 'total': 0, //总数
                 'defaultCurrent': 1, //默认的当前页数
                 'defaultPageSize': 20, //默认的每页条数
-                'pageSizeOptions': [20, 50, 100], //[10,20,30,40]
+                'pageSizeOptions': [10, 50, 100], //[10,20,30,40]
                 'showPageSize': false, //是否显示分页切换
                 'showTotal': false, //是否显示总条数
                 'showTotalPage': false, //是否显示总页数
@@ -174,16 +174,16 @@ $(function () {
                 $list.on('click', '.zr-pagination-pre', function () {
                     if(_currentPage > 1){
                         _currentPage --;
+                        reloadBar(); //计算分页;
+                        opt.onChange(_currentPage); //执行回调   
                     }
-                    reloadBar(); //计算分页;
-                    opt.onChange(_currentPage); //执行回调
                 });
                 $list.on('click', '.zr-pagination-next', function () {
                     if(_currentPage < _page){
                         _currentPage ++;
+                        reloadBar(); //计算分页;
+                        opt.onChange(_currentPage); //执行回调
                     }
-                    reloadBar(); //计算分页;
-                    opt.onChange(_currentPage); //执行回调
                 });
                 $element.on('input', '.zr-pagination-options-jump input', function (ev) {
                     var value = ev.target.value;
