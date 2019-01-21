@@ -54,10 +54,9 @@ $(function () {
                 _page = Math.ceil(_total / _pageSize),
                 _pageList = [];
 
-            console.log('总页数=> ', _page);
-            console.log('每页条数=> ', _pageSize);
             //计算
             var countPageBar = function () {
+                initModule(); //初始化模版
                 _pageList = [];
                 if (_page < 7) {
                     for (var i = 0; i < _page; i++) {
@@ -73,8 +72,7 @@ $(function () {
                     }
 
                 }
-                console.log(_pageList);
-                renderPageBar();
+                renderPageBar(); //渲染
             }
             var renderPageBar = function () {
                 var html = '<ul class="zr-pagination-list">';
@@ -95,7 +93,7 @@ $(function () {
                 html += JUMP_M;
                 html += '</ul>';
                 $list.html(html);
-                initDropdown(); //初始化下拉
+                initDropdown(); //初始化下拉模块
             };
             var parseDOM = function () {
 
@@ -128,6 +126,13 @@ $(function () {
                         var num = $(this).children('a').html();
                         var inner = num + '/页<i class="zr-icon-angle zr-icon-down"></i>'
                         $link.html(inner);
+                        //重新计算页数
+                        _currentPage = 1,
+                        _pageSize = num,
+                        _page = Math.ceil(_total / _pageSize);
+                        countPageBar();
+                        //执行回调
+                        opt.onShowSizeChange.call(this, 50);
                     })
 
                     //自定义属性
@@ -253,7 +258,6 @@ $(function () {
             var init = function () {
                 parseDOM();
                 bindListener();
-                initModule();
                 countPageBar();
             };
             init();

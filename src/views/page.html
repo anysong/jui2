@@ -31,10 +31,26 @@
                 'showInfo': true, //是否显示分页信息
                 'showJump': true, //是否显示跳转框
                 'onChange': function(current){
+                },
+                'onShowSizeChange': function(num){
+                    console.log(this);
+                    console.log(num);
                 }
             })     
             $('#page2')[0].onzrinit({
-                'total': 0
+                'total': 200,
+                'pageSize': 5,
+                'showTotalPage': true, //是否显示分页总数
+                'showPageSize': true, //是否显示分页切换
+                'showTotal': true, //是否显示总数
+                'showInfo': true, //是否显示分页信息
+                'showJump': true, //是否显示跳转框
+                'onChange': function(current){
+                },
+                'onShowSizeChange': function(num){
+                    console.log(this);
+                    console.log(num);
+                }
             })       
         })
     </script>
