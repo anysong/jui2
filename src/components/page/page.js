@@ -23,7 +23,7 @@ $(function () {
                 'total': 0, //总数
                 'defaultCurrent': 1, //默认的当前页数
                 'defaultPageSize': 15, //默认的每页条数
-                'pageSizeOptions': [], //[10,20,30,40]
+                'pageSizeOptions': [50, 100], //[10,20,30,40]
                 'showPageSize': false, //是否显示分页切换
                 'showTotal': false, //是否显示总条数
                 'showTotalPage': false, //是否显示总页数
@@ -125,7 +125,9 @@ $(function () {
                         return false;
                     })
                     $element.on('click', '.zr-dropdown-item', function (ev) {
-                        ev.stopPropagation();
+                        var num = $(this).children('a').html();
+                        var inner = num + '/页<i class="zr-icon-angle zr-icon-down"></i>'
+                        $link.html(inner);
                     })
 
                     //自定义属性
@@ -229,11 +231,15 @@ $(function () {
                 TOTAL_M = '<li class="zr-pagination-total-text">共' + _total + '条</li>';
                 //每页条数
                 SIZE_M = '<div class="zr-dropdown zr-dropdown-btn" data-type="click">' +
-                    '<a class="zr-dropdown-link" href="javascript:;">Click1<i class="zr-icon-angle zr-icon-down"></i></a>' +
-                    '<div class="zr-dropdown-menu">' +
-                    '<li class="zr-dropdown-item"><a href="javascript:;">Action</a></li>' +
-                    '</div>' +
-                    '</div>';
+                    '<a class="zr-dropdown-link" href="javascript:;">50/页<i class="zr-icon-angle zr-icon-down"></i></a>' +
+                    '<div class="zr-dropdown-menu">';
+                var html_li = '';
+                opt.pageSizeOptions.map(function (item) {
+                    html_li += '<li class="zr-dropdown-item"><a href="javascript:;">' + parseInt(item) + '</a></li>';
+                })
+                SIZE_M += html_li;
+                SIZE_M += '</div></div>';
+
                 //信息
                 INFO_M = '';
             }
