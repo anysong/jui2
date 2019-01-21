@@ -251,6 +251,9 @@ $zr-color: #4363f4;
                     margin: 0 8px;
                     width: 50px;
                     outline: none;
+                    &:hover {
+                        border-color: $zr-color; 
+                    }
                 }
             }
         }

@@ -21,6 +21,7 @@
     <div class="zr-pagination" id="page2"></div>
     <div class="zr-pagination" id="page3"></div>
     <div class="zr-pagination" id="page4"></div>
+    <div class="zr-pagination" id="page5"></div>
     <script>
         
         $(function(){
@@ -55,6 +56,21 @@
                     console.log(num);
                 }
             })       
+            $('#page4')[0].onzrinit({
+                'total': 30,
+                'pageSize': 5,
+                'showTotalPage': true, //是否显示分页总数
+                'showPageSize': true, //是否显示分页切换
+                'showTotal': true, //是否显示总数
+                'showInfo': true, //是否显示分页信息
+                'showJump': true, //是否显示跳转框
+                'onChange': function(current){
+                },
+                'onShowSizeChange': function(num){
+                    console.log(this);
+                    console.log(num);
+                }
+            }) 
             $('#page3')[0].onzrinit({
                 'total': 30,
                 'pageSize': 5,
@@ -69,7 +85,7 @@
                     console.log(this);
                     console.log(num);
                 }
-            })   
+            })     
         })
     </script>
 </body>

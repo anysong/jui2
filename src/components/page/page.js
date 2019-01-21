@@ -3,9 +3,9 @@ $(function () {
     $('.zr-pagination').each(function (index, element) {
         var $original = $(element);
         var html = '<ul class="zr-pagination-list">' +
-            '<li class="zr-pagination-pre"><a href="javascript:;"></a></li>' +
+            '<li class="zr-pagination-pre zr-pagination-disable"><a href="javascript:;"></a></li>' +
             '<li class="zr-pagination-item active"><a href="javascript:;">1</a></li>' +
-            '<li class="zr-pagination-next"><a href="javascript:;"></a></li>' +
+            '<li class="zr-pagination-next zr-pagination-disable"><a href="javascript:;"></a></li>' +
             '</ul>';
         $original.html(html);
         addEvent(element);
@@ -272,7 +272,7 @@ $(function () {
             //初始化分页下拉
             var initSize = function () {
                 //每页条数
-                SIZE_M = '<div class="zr-dropdown zr-dropdown-btn" data-type="click">' +
+                SIZE_M = '<div class="zr-dropdown zr-dropdown-btn zr-dropdown-equal" data-type="click">' +
                     '<a class="zr-dropdown-link" href="javascript:;">' +
                     _pageSize + '/页<i class="zr-icon-angle zr-icon-down"></i></a>' +
                     '<div class="zr-dropdown-menu">';
