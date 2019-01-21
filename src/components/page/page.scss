@@ -58,7 +58,7 @@ $zr-color: #4363f4;
         .zr-pagination-options {
             display: inline-block;
             vertical-align: middle;
-            margin-left: 16px;
+            margin-left: 8px;
             .zr-pagination-options-jump {
                 display: inline-block;
                 vertical-align: top;
@@ -92,5 +92,9 @@ $zr-color: #4363f4;
             clear: both;
             display: block;
         }
+    }
+    //下拉
+    .zr-dropdown {
+        margin: 0 5px;
     }
 }
