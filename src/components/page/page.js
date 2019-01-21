@@ -78,6 +78,7 @@ $(function () {
             }
             var renderPageBar = function () {
                 var html = '<ul class="zr-pagination-list">';
+                html += TOTAL_M;
                 html += PRE_M;
                 for (var i = 0; i < _pageList.length; i++) {
                     if (_currentPage == _pageList[i]) {
@@ -125,9 +126,9 @@ $(function () {
                 '</div>'+
                 '</li>';
                 //总页数
-                PAGE_M = '<li class="zr-pagination-total-page">'+ _page + '页</li>';
+                PAGE_M = '<li class="zr-pagination-total-page">共'+ _page + '页</li>';
                 //总条数
-                TOTAL_M = '<li class="zr-pagination-total-text">'+ _total + '条</li>';
+                TOTAL_M = '<li class="zr-pagination-total-text">共'+ _total + '条</li>';
                 //每页条数
                 SIZE_M = '';
                 //信息
