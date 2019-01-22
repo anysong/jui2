@@ -112,7 +112,7 @@ $zr-hover-color: #40a9ff;
     .zr-dropdown-link {
         text-decoration: none;
         font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
-        color: $zr-color;
+        color: rgba(0,0,0,0.65);
         font-size: 14px;
         transition: color .3s ease;
         white-space: nowrap;
