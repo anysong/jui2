@@ -12,7 +12,7 @@ $(function () {
     })
     //绑定自定义事件
     function addEvent(dom) {
-        dom.onzrinit = function (option) {
+        dom.onnvchange = function (option) {
             var $element = $(this),
                 $list = $element.children('ul'),
                 element = this;
@@ -65,7 +65,9 @@ $(function () {
                 _currentPage = opt.current,
                 _pageSize = opt.pageSize || opt.defaultPageSize,
                 _page = Math.ceil(_total / _pageSize),
-                _pageList = [];
+                _pageList = [],
+                _start = 0,
+                _end = 0;
 
 
             var initDropdown = function () {
@@ -180,13 +182,27 @@ $(function () {
 
                     _currentPage = parseInt(pageNo);
                     reloadBar(); //计算分页;
-                    opt.onChange(_currentPage); //执行回调
+                    opt.onChange({
+                        'total': _total,
+                        'pageNo': _currentPage,
+                        'pageSize': _pageSize,
+                        'totalPage': _page,
+                        'start': _start,
+                        'end': _end
+                    }); //执行回调
                 });
                 $list.on('click', '.zr-pagination-pre', function () {
                     if (_currentPage > 1) {
                         _currentPage--;
                         reloadBar(); //计算分页;
-                        opt.onChange(_currentPage); //执行回调   
+                        opt.onChange({
+                            'total': _total,
+                            'pageNo': _currentPage,
+                            'pageSize': _pageSize,
+                            'totalPage': _page,
+                            'start': _start,
+                            'end': _end
+                        }); //执行回调   
                     }
                 });
                 $list.on('click', '.zr-pagination-next', function () {
@@ -239,7 +255,9 @@ $(function () {
             };
             //计算起始结束
             var countStart = function () {
-
+                var pageNum = _currentPage - 1;
+                _start = pageNum * _pageSize;
+                _end = _start + _pageSize;
             };
             //初始化分页
             var initBar = function () {
@@ -339,6 +357,7 @@ $(function () {
             };
             var reloadBar = function () {
                 countBar();
+                countStart();
                 initModule();
                 initBar();
                 render();
@@ -346,6 +365,7 @@ $(function () {
             var init = function () {
                 bindListener();
                 countBar();
+                countStart();
                 initModule(); //初始化各部分模块(除页码)
                 initBar(); //初始化分页条
                 render(); //组装渲染;
