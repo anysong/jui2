@@ -22,8 +22,8 @@ $(function () {
                 'pageSize': 10, //每页条数
                 'total': 0, //总数
                 'defaultCurrent': 1, //默认的当前页数
-                'defaultPageSize': 20, //默认的每页条数
-                'pageSizeOptions': [10, 50, 100], //[10,20,30,40]
+                'defaultPageSize': 10, //默认的每页条数
+                'pageSizeOptions': [10, 20, 50, 100], //[10,20,50,100]
                 'showPageSize': false, //是否显示分页切换
                 'showTotal': false, //是否显示总条数
                 'showTotalPage': false, //是否显示总页数
@@ -31,7 +31,16 @@ $(function () {
                 'showJump': false, //是否显示跳转框
                 'onChange': function () {}, //分页点击
                 'onShowSizeChange': function () {}, //每页下拉回调
-                'errNotice': '输入有误,请检查后重新尝试'
+                'errNotice': '输入有误,请检查后重新尝试',
+                'showTextBtn': false,
+                'language': {
+                    'pre': '上页',
+                    'next': '下页',
+                    'total': '共',
+                    'item': '条',
+                    'page': '页',
+                    'jump': '跳转'
+                }
             }, option);
             // 可选模块
             var BAR,
@@ -48,6 +57,7 @@ $(function () {
                 console.log('总条数=> ', opt.total);
             } else {
                 //请传入分页条数
+                alert('total no data');
                 return;
             }
             var _total = opt.total,
@@ -192,7 +202,7 @@ $(function () {
                 $element.on('keyup', '.zr-pagination-options-jump input', function (ev) {
                     if (ev.keyCode == 13) {
                         var pageNo = parseInt(ev.target.value);
-                        console.log(pageNo);
+                        if(pageNo === _currentPage) return;
                         if (!isNaN(pageNo) && pageNo > 0 && pageNo < _page + 1) {
                             //执行跳转
                             _currentPage = pageNo;
@@ -243,38 +253,54 @@ $(function () {
             var initModule = function () {
                 //上一页
                 if(_currentPage === 1){
-                    PRE_M = '<li class="zr-pagination-pre zr-pagination-disable"><a href="javascript:;"></a></li>';
+                    if(opt.showTextBtn){
+                        PRE_M = '<li class="zr-pagination-pre zr-pagination-pre-text zr-pagination-disable"><a href="javascript:;">'+ opt.language.pre +'</a></li>';
+                    }else {
+                        PRE_M = '<li class="zr-pagination-pre zr-pagination-disable"><a href="javascript:;"></a></li>';
+                    }
                 }else {
-                    PRE_M = '<li class="zr-pagination-pre"><a href="javascript:;"></a></li>';
+                    if(opt.showTextBtn){
+                        PRE_M = '<li class="zr-pagination-pre zr-pagination-pre-text"><a href="javascript:;">'+ opt.language.pre +'</a></li>';
+                    }else {
+                        PRE_M = '<li class="zr-pagination-pre"><a href="javascript:;"></a></li>';
+                    }
                 }
                 //下一页
                 if(_currentPage === _page){
-                    NEXT_M = '<li class="zr-pagination-next zr-pagination-disable"><a href="javascript:;"></a></li>';
+                    if(opt.showTextBtn){
+                        NEXT_M = '<li class="zr-pagination-next zr-pagination-next-text zr-pagination-disable"><a href="javascript:;">'+ opt.language.next +'</a></li>';
+                    }else {
+                        NEXT_M = '<li class="zr-pagination-next zr-pagination-disable"><a href="javascript:;"></a></li>';
+                    }
                 }else {
-                    NEXT_M = '<li class="zr-pagination-next"><a href="javascript:;"></a></li>';
+                    if(opt.showTextBtn){
+                        NEXT_M = '<li class="zr-pagination-next zr-pagination-next-text"><a href="javascript:;">'+ opt.language.next +'</a></li>';
+                    }else {
+                        NEXT_M = '<li class="zr-pagination-next"><a href="javascript:;"></a></li>';
+                    }
                 }
                 
                 //跳转
                 JUMP_M = '<li class="zr-pagination-options">' +
-                    '<div class="zr-pagination-options-jump">跳转' +
-                    '<input type="text" value="' + _currentPage + '">页' +
+                    '<div class="zr-pagination-options-jump">'+ opt.language.jump +
+                    '<input type="text" value="' + _currentPage + '">' + opt.language.page +
                     '</div>' +
                     '</li>';
                 //总页数
-                PAGE_M = '<li class="zr-pagination-total-page">共' + _page + '页</li>';
+                PAGE_M = '<li class="zr-pagination-total-page">'+ opt.language.total + _page + opt.language.page + '</li>';
                 //总条数
-                TOTAL_M = '<li class="zr-pagination-total-text">共' + _total + '条</li>';
+                TOTAL_M = '<li class="zr-pagination-total-text">'+ opt.language.total + _total + opt.language.item + '</li>';
                 //信息
                 INFO_M = '';
                 //分页下拉
                 initSize();
-            }
+            };
             //初始化分页下拉
             var initSize = function () {
                 //每页条数
                 SIZE_M = '<div class="zr-dropdown zr-dropdown-btn zr-dropdown-equal" data-type="click">' +
                     '<a class="zr-dropdown-link" href="javascript:;">' +
-                    _pageSize + '/页<i class="zr-icon-angle zr-icon-down"></i></a>' +
+                    _pageSize + '/' + opt.language.page + '<i class="zr-icon-angle zr-icon-down"></i></a>' +
                     '<div class="zr-dropdown-menu">';
                 var html_li = '';
                 opt.pageSizeOptions.map(function (item) {
