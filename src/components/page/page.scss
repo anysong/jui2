@@ -288,15 +288,19 @@ $zr-color: #4363f4;
 
             &.active {
                 border-color: $zr-color;
-
+                background-color: $zr-color;
                 a {
-                    color: $zr-color;
+                    color: white;
+                }
+                &:hover {
+                    a {
+                        color: white;
+                    }
                 }
             }
 
             &:hover {
                 border-color: $zr-color;
-
                 a {
                     color: $zr-color;
                 }
