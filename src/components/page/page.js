@@ -17,7 +17,7 @@ $(function () {
                 $list = $element.children('ul'),
                 element = this;
 
-            var opt = $.extend({
+            var opt = $.extend(true, {
                 'current': 1, //当前页数
                 'pageSize': 10, //每页条数
                 'total': 0, //总数
@@ -35,6 +35,7 @@ $(function () {
                 'showTextBtn': false,
                 'type': 'complete', //分页类型 默认完整 complete/simple/mini
                 'language': {
+                    'lan': 'zh_CN',
                     'pre': '上页',
                     'next': '下页',
                     'total': '共',
