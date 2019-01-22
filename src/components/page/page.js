@@ -43,6 +43,10 @@ $(function () {
                     'jump': '跳转'
                 }
             }, option);
+
+            if(opt.type === 'mini'){
+                $list.removeClass('zr-pagination-list').addClass('zr-pagination-mini-list');
+            }
             // 可选模块
             var BAR,
                 SIZE_M,
@@ -318,12 +322,17 @@ $(function () {
             };
             //初始化分页下拉
             var initSize = function () {
-                //每页条数
-                SIZE_M = '<div class="zr-dropdown zr-dropdown-btn zr-dropdown-equal" data-type="click">' +
+                //每页条数 complete/simple/mini
+                if(opt.type === 'complete'){
+                    SIZE_M = '<div class="zr-dropdown zr-dropdown-btn" data-type="click">' +
                     '<a class="zr-dropdown-link" href="javascript:;">' +
-                    _pageSize + '<i style="padding:0 2px">/</i>' + opt.language.page + '</a>' +
-                    // _pageSize + '/' + opt.language.page + '<i class="zr-icon-angle zr-icon-down"></i></a>' +
-                    '<div class="zr-dropdown-menu">';
+                    _pageSize + '<i style="padding:0 2px">/</i>' + opt.language.page + '</a><div class="zr-dropdown-menu">';
+                }else if(opt.type === 'mini'){
+                    SIZE_M = '<div class="zr-dropdown" style="vertical-align: middle;" data-type="click">' +
+                    '<a class="zr-dropdown-link" href="javascript:;">' +
+                    _pageSize + '<i style="padding:0 2px">/</i>' + opt.language.page + '</a><div class="zr-dropdown-menu">';
+                }
+               
                 var html_li = '';
                 opt.pageSizeOptions.map(function (item) {
                     html_li += '<li class="zr-dropdown-item"><a href="javascript:;">' + parseInt(item) + '</a></li>';
@@ -333,7 +342,7 @@ $(function () {
             };
             //渲染
             var render = function () {
-                var html = '<ul class="zr-pagination-list">';
+                var html = '';
                 if (opt.showTotal) {
                     html += TOTAL_M;
                 }
@@ -349,7 +358,6 @@ $(function () {
                 if (opt.showJump) {
                     html += JUMP_M;
                 }
-                html += '</ul>';
                 //渲染
                 $list.html(html);
                 initDropdown(); //初始化下拉模块
