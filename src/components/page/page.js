@@ -96,12 +96,10 @@ $(function () {
                     })
                     $element.on('click', '.zr-dropdown-item', function (ev) {
                         var num = $(this).children('a').html();
-                        var inner = num + '/页<i class="zr-icon-angle zr-icon-down"></i>'
-                        $link.html(inner);
                         //重新计算页数
-                        _currentPage = 1,
-                            _pageSize = num,
-                            _page = Math.ceil(_total / _pageSize);
+                        _currentPage = 1;
+                        _pageSize = num;
+                        _page = Math.ceil(_total / _pageSize);
                         reloadBar();
                         //执行回调
                         opt.onShowSizeChange.call(this, _pageSize);
@@ -323,7 +321,8 @@ $(function () {
                 //每页条数
                 SIZE_M = '<div class="zr-dropdown zr-dropdown-btn zr-dropdown-equal" data-type="click">' +
                     '<a class="zr-dropdown-link" href="javascript:;">' +
-                    _pageSize + '/' + opt.language.page + '<i class="zr-icon-angle zr-icon-down"></i></a>' +
+                    _pageSize + '<i style="padding:0 2px">/</i>' + opt.language.page + '</a>' +
+                    // _pageSize + '/' + opt.language.page + '<i class="zr-icon-angle zr-icon-down"></i></a>' +
                     '<div class="zr-dropdown-menu">';
                 var html_li = '';
                 opt.pageSizeOptions.map(function (item) {
