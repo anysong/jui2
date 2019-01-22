@@ -19,17 +19,18 @@
     <div class="zr-pagination" id="page1"></div>
     <div class="zr-pagination" id="page2"></div>
     <script>
-        var pageChange = function(page){
-            console.log(page)
+        var pageChange = function(obj){
+            console.log(obj)
         }
         $(function(){
             $('#page1')[0].onnvchange({
                 'total': 250,
                 'pageSize': 5,
+                'showPageSize': true, //是否显示分页切换
+                'showTextBtn': true, //是否显示分页切换
                 'onChange': pageChange,
                 'onShowSizeChange': function(num){
-                    console.log(this);
-                    console.log(num);
+                    console.log('33',num);
                 }
             })     
             $('#page2')[0].onnvchange({

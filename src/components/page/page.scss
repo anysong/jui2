@@ -2,6 +2,7 @@ $zr-color: #4363f4;
 
 .zr-pagination {
     font-size: 14px;
+
     .zr-pagination-list {
         margin: 0;
         padding: 0;
@@ -26,10 +27,11 @@ $zr-color: #4363f4;
             margin-right: 8px;
             outline: 0;
             box-sizing: border-box;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            transition: all .3s;
 
             a {
-                border-radius: 4px;
-                border: 1px solid #d9d9d9;
                 display: block;
                 height: 100%;
                 transition: all .3s;
@@ -46,11 +48,12 @@ $zr-color: #4363f4;
                     transition: all .3s;
                     border-color: rgba(0, 0, 0, 0.65);
                 }
+            }
 
-                &:hover {
-                    border-color: $zr-color;
-                    color: $zr-color;
+            &:hover {
+                border-color: $zr-color;
 
+                a {
                     &::after {
                         border-color: $zr-color !important;
                     }
@@ -66,11 +69,12 @@ $zr-color: #4363f4;
                     &::after {
                         border-color: rgba(0, 0, 0, 0.25);
                     }
+                }
 
-                    &:hover {
-                        border-color: #d9d9d9;
-                        color: #d9d9d9;
+                &:hover {
+                    border-color: #d9d9d9;
 
+                    a {
                         &::after {
                             border-color: rgba(0, 0, 0, 0.25) !important;
                         }
@@ -79,28 +83,25 @@ $zr-color: #4363f4;
             }
 
             //文案按钮
-            &.zr-pagination-pre-text {
+            &.zr-pagination-text {
                 a {
                     color: rgba(0, 0, 0, 0.65);
                     text-decoration: none;
-                    border-radius: 4px;
-                    border: 1px solid #d9d9d9;
                     display: block;
                     height: 100%;
                     transition: all .3s;
                     padding: 0 5px;
 
-                    &:hover {
-                        border-color: $zr-color;
-                        color: $zr-color;
-
-                        &::after {
-                            border-color: $zr-color !important;
-                        }
-                    }
-
                     &::after {
                         display: none;
+                    }
+                }
+
+                &:hover {
+                    border-color: $zr-color;
+
+                    a {
+                        color: $zr-color;
                     }
                 }
 
@@ -108,16 +109,15 @@ $zr-color: #4363f4;
                     cursor: not-allowed;
 
                     a {
-                        color: #d9d9d9;
                         cursor: not-allowed;
+                        color: #d9d9d9;
+                    }
 
-                        &:hover {
-                            border-color: #d9d9d9;
+                    &:hover {
+                        border-color: #d9d9d9;
+
+                        a {
                             color: #d9d9d9;
-
-                            &::after {
-                                border-color: rgba(0, 0, 0, 0.25) !important;
-                            }
                         }
                     }
                 }
@@ -139,10 +139,11 @@ $zr-color: #4363f4;
             margin-right: 8px;
             outline: 0;
             box-sizing: border-box;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            transition: all .3s;
 
             a {
-                border-radius: 4px;
-                border: 1px solid #d9d9d9;
                 display: block;
                 height: 100%;
                 transition: all .3s;
@@ -159,11 +160,12 @@ $zr-color: #4363f4;
                     transition: all .3s;
                     border-color: rgba(0, 0, 0, 0.65);
                 }
+            }
 
-                &:hover {
-                    border-color: $zr-color;
-                    color: $zr-color;
+            &:hover {
+                border-color: $zr-color;
 
+                a {
                     &::after {
                         border-color: $zr-color !important;
                     }
@@ -179,11 +181,12 @@ $zr-color: #4363f4;
                     &::after {
                         border-color: rgba(0, 0, 0, 0.25);
                     }
+                }
 
-                    &:hover {
-                        border-color: #d9d9d9;
-                        color: #d9d9d9;
+                &:hover {
+                    border-color: #d9d9d9;
 
+                    a {
                         &::after {
                             border-color: rgba(0, 0, 0, 0.25) !important;
                         }
@@ -192,28 +195,25 @@ $zr-color: #4363f4;
             }
 
             //文案按钮
-            &.zr-pagination-next-text {
+            &.zr-pagination-text {
                 a {
                     color: rgba(0, 0, 0, 0.65);
                     text-decoration: none;
-                    border-radius: 4px;
-                    border: 1px solid #d9d9d9;
                     display: block;
                     height: 100%;
                     transition: all .3s;
                     padding: 0 5px;
 
-                    &:hover {
-                        border-color: $zr-color;
-                        color: $zr-color;
-
-                        &::after {
-                            border-color: $zr-color !important;
-                        }
-                    }
-
                     &::after {
                         display: none;
+                    }
+                }
+
+                &:hover {
+                    border-color: $zr-color;
+
+                    a {
+                        color: $zr-color;
                     }
                 }
 
@@ -221,16 +221,15 @@ $zr-color: #4363f4;
                     cursor: not-allowed;
 
                     a {
-                        color: #d9d9d9;
                         cursor: not-allowed;
+                        color: #d9d9d9;
+                    }
 
-                        &:hover {
-                            border-color: #d9d9d9;
+                    &:hover {
+                        border-color: #d9d9d9;
+
+                        a {
                             color: #d9d9d9;
-
-                            &::after {
-                                border-color: rgba(0, 0, 0, 0.25) !important;
-                            }
                         }
                     }
                 }
@@ -308,7 +307,7 @@ $zr-color: #4363f4;
             display: inline-block;
             vertical-align: middle;
             height: 32px;
-            line-height: 30px;
+            line-height: 32px;
             margin-right: 8px;
         }
 
@@ -316,7 +315,7 @@ $zr-color: #4363f4;
             display: inline-block;
             vertical-align: middle;
             height: 32px;
-            line-height: 30px;
+            line-height: 32px;
             margin-left: 8px;
         }
 

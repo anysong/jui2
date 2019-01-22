@@ -277,13 +277,13 @@ $(function () {
                 //上一页
                 if (_currentPage === 1) {
                     if (opt.showTextBtn) {
-                        PRE_M = '<li class="zr-pagination-pre zr-pagination-pre-text zr-pagination-disable"><a href="javascript:;">' + opt.language.pre + '</a></li>';
+                        PRE_M = '<li class="zr-pagination-pre zr-pagination-text zr-pagination-disable"><a href="javascript:;">' + opt.language.pre + '</a></li>';
                     } else {
                         PRE_M = '<li class="zr-pagination-pre zr-pagination-disable"><a href="javascript:;"></a></li>';
                     }
                 } else {
                     if (opt.showTextBtn) {
-                        PRE_M = '<li class="zr-pagination-pre zr-pagination-pre-text"><a href="javascript:;">' + opt.language.pre + '</a></li>';
+                        PRE_M = '<li class="zr-pagination-pre zr-pagination-text"><a href="javascript:;">' + opt.language.pre + '</a></li>';
                     } else {
                         PRE_M = '<li class="zr-pagination-pre"><a href="javascript:;"></a></li>';
                     }
@@ -291,13 +291,13 @@ $(function () {
                 //下一页
                 if (_currentPage === _page) {
                     if (opt.showTextBtn) {
-                        NEXT_M = '<li class="zr-pagination-next zr-pagination-next-text zr-pagination-disable"><a href="javascript:;">' + opt.language.next + '</a></li>';
+                        NEXT_M = '<li class="zr-pagination-next zr-pagination-text zr-pagination-disable"><a href="javascript:;">' + opt.language.next + '</a></li>';
                     } else {
                         NEXT_M = '<li class="zr-pagination-next zr-pagination-disable"><a href="javascript:;"></a></li>';
                     }
                 } else {
                     if (opt.showTextBtn) {
-                        NEXT_M = '<li class="zr-pagination-next zr-pagination-next-text"><a href="javascript:;">' + opt.language.next + '</a></li>';
+                        NEXT_M = '<li class="zr-pagination-next zr-pagination-text"><a href="javascript:;">' + opt.language.next + '</a></li>';
                     } else {
                         NEXT_M = '<li class="zr-pagination-next"><a href="javascript:;"></a></li>';
                     }
