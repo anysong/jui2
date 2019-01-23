@@ -11,7 +11,8 @@ var config = {
         'upload',
         'page',
         'page2',
-        'page3'
+        'page3',
+        'page4'
     ]
 };
 
