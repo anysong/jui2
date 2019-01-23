@@ -193,7 +193,6 @@
 					Method.getData();
 					Method.showPageindex(0, opts.maxPage, opts.pNum);
 				});
-
 			},
 			/*xhhtml : function(index, count){
 				for (var i = ((index-1)*opts.displayCount); i < count; i++) {
