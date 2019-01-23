@@ -1,14 +1,16 @@
-//zr-pagination
+
+/**
+ * zr-pagination
+ * config.id 必传
+ */
+
 var _pagination = {
     init: function (config) {
-        //必须传id
-        if (config.id) {
-            _pagination.el = $('#' + config.id); //唯一id
+        if (config.id) { 
             _pagination.options = $.extend(true, _pagination.options, config); //配置
             _pagination.events.init();
         }
     },
-    el: '',
     options: {
         'current': 1, //当前页数
         'pageSize': 10, //每页条数
@@ -38,7 +40,7 @@ var _pagination = {
     },
     events: {
         init: function () {
-            var $element = _pagination.el;
+            var $element = $('#' + _pagination.options.id);
             var html = '<ul class="zr-pagination-list">' +
                 '<li class="zr-pagination-pre zr-pagination-disable"><a href="javascript:;"></a></li>' +
                 '<li class="zr-pagination-item active"><a href="javascript:;">1</a></li>' +
