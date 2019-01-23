@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page</title>
+    <script src="/plugins/jquery3.3.1.js"></script>
+    <script src="/dest/components/page3/page3.js"></script>
+    <link rel="stylesheet" href="/dest/components/base/base.css">
+    <link rel="stylesheet" href="/dest/components/page3/page3.css">
+    <!-- 下拉 -->
+    <script src="/dest/components/dropdown/dropdown.js"></script>
+    <link rel="stylesheet" href="/dest/components/dropdown/dropdown.css">
+</head>
+
+<body>
+    <div class="zr-pagination" id="page1"></div>
+    <script>
+        $(function(){
+           _pagination.init({
+                'id': 'page1',
+                'total': 250,
+                'pageSize': 5,
+                // 'type': 'mini',
+                'showTotalPage': true, //是否显示分页总数
+                'showPageSize': true, //是否显示分页切换
+                'showTotal': true, //是否显示总数
+                'showInfo': true, //是否显示分页信息
+                'showJump': true, //是否显示跳转框
+                'onChange': function(current){
+                },
+                'onShowSizeChange': function(num){
+                    console.log(this);
+                    console.log(num);
+                }
+           })
+        })
+    </script>
+</body>
+</html>
