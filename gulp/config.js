@@ -9,7 +9,8 @@ var config = {
         'checkbox3',
         'dropdown',
         'upload',
-        'page'
+        'page',
+        'page2',
     ]
 };
 
