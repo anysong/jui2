@@ -17,6 +17,7 @@
 
 <body>
     <div class="zr-pagination" id="page1"></div>
+    <div class="zr-pagination" id="page2"></div>
     <script>
         $(function(){
            _pagination.init({
@@ -29,6 +30,18 @@
                 'showTotal': true, //是否显示总数
                 'showInfo': true, //是否显示分页信息
                 'showJump': true, //是否显示跳转框
+                'onChange': function(current){
+                },
+                'onShowSizeChange': function(num){
+                    console.log(this);
+                    console.log(num);
+                }
+           })
+           _pagination.init({
+                'id': 'page2',
+                'total': 250,
+                'pageSize': 5,
+                'type': 'mini',
                 'onChange': function(current){
                 },
                 'onShowSizeChange': function(num){
