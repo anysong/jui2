@@ -336,7 +336,7 @@ var _pagination = {
                         '<a class="zr-dropdown-link" href="javascript:;">' +
                         _pageSize + '<i style="padding:0 2px">/</i>' + opt.language.page + '</a><div class="zr-dropdown-menu">';
                 } else if (opt.type === 'mini') {
-                    SIZE_M = '<div class="zr-dropdown" style="vertical-align: middle;" data-type="click">' +
+                    SIZE_M = '<div class="zr-pagination-dropdown" data-type="click" style="vertical-align: middle;">' +
                         '<a class="zr-dropdown-link" href="javascript:;">' +
                         _pageSize + '<i style="padding:0 2px">/</i>' + opt.language.page + '</a><div class="zr-dropdown-menu">';
                 }
